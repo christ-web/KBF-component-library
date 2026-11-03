@@ -1,0 +1,116 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.fs-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  /* Title/Final Color from the series' Colors (Chris, 2026-10-21); unset, the page's own background. */
+  background-color: var(--kbf-color-title-bg, var(--kbf-color-bg, #f8fafc));
+  /* The brand gradient, when the series' fill is Gradient (Chris, 2026-10-20); `none` on Solid. A photo or a
+     background colour replaces it from `component.js`. */
+  background-image: var(--kbf-brand-gradient, none);
+  background-size: cover;
+  background-position: center;
+}
+
+/* ── The scrim ────────────────────────────────────────────────────────────────
+   A veil between an author-supplied background photograph and the closing text on it. Nothing can
+   measure contrast against a photograph, so the veil is what gives the pair a background KBF chose.
+
+   Black or white and nothing between (Chris's rule of 2026-09-18), with the direction following the
+   text: light text gets the dark veil, dark text the light one, decided in `component.js` from
+   Title/Final Heading as painted (Chris, 2026-10-22). 0.6 either way —
+   the smallest alpha at which every colour this slide paints clears its floor over the worst
+   photograph, including the two translucent light variants below, which land at 5.03:1 and 4.69:1.
+   `backend/tests/test_component_scrim.py` is that arithmetic.
+
+   A background *layer*, composed in `component.js` as `var(--fs-scrim, none), url(…)`, so the veil
+   and the photo are two layers of one property on one box. */
+.fs-wrapper { --fs-scrim: none; }
+.fs-wrapper.fs-scrim-dark  { --fs-scrim: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)); }
+.fs-wrapper.fs-scrim-light { --fs-scrim: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)); }
+
+/* A subtitle nobody gave a Title/Final Subtitle colour takes the black-or-white endpoint over a veil, as the
+   Title Slide's does: Muted Text's #64748b is 1.67:1 on the light veil's worst composite. A colour Graphics
+   picked stands, and the Colors panel measures it there (Chris, 2026-10-22); `component.js` adds
+   `fs-endpoint` only while the token is unset. */
+.fs-scrim-light .fs-subtitle.fs-endpoint { color: #000000; }
+.fs-scrim-dark .fs-subtitle.fs-endpoint  { color: #ffffff; }
+
+.fs-content {
+  max-width: 720px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fs-title {
+  font: var(--kbf-type-display-xl, 800 clamp(2rem, 6vw, 4.5rem)/1.1 system-ui, sans-serif);
+  /* Title Font on Series Styles (Chris, 2026-10-21): the Title Slide's and the Final Slide's titles share it.
+     Unset, the title keeps the look's display face, which its type role already carries. */
+  font-family: var(--kbf-font-title, var(--kbf-family-display, system-ui, sans-serif));
+  letter-spacing: var(--kbf-type-display-xl-tracking, normal);
+  text-transform: var(--kbf-type-display-xl-transform, none);
+  margin: 0;
+  /* Title/Final Heading when Graphics picked one (Chris, 2026-10-22), on a heading band too: a picker that
+     visibly does nothing on Poster was the bug. Unpicked, the band's ink on a look with a band
+     (`--kbf-band-ink` is `initial` on every other look), and then Heading Text. */
+  color: var(--kbf-color-title-heading, var(--kbf-band-ink, var(--kbf-color-heading, #0f172a)));
+}
+
+.fs-title--dark    { color: var(--kbf-color-heading, #0f172a); }
+.fs-title--light   { color: #ffffff; }
+/* Ruling 24: primary used as text → link token */
+.fs-title--primary { color: var(--kbf-color-link, var(--kbf-color-primary, #00293C)); }
+
+/* headingL set in the display family, as now */
+.fs-subtitle {
+  font: var(--kbf-type-heading-l, 600 clamp(1.2rem, 3vw, 2.2rem)/1.2 system-ui, sans-serif);
+  font-family: var(--kbf-family-display, var(--kbf-font-heading, system-ui, sans-serif));
+  letter-spacing: var(--kbf-type-heading-l-tracking, normal);
+  text-transform: var(--kbf-type-heading-l-transform, none);
+  margin: 0;
+  /* Title/Final Subtitle, the Title Slide's subtitle colour too (Chris, 2026-10-22); unset, Muted Text.
+     It was Heading Text, which is why it never followed Muted Text. */
+  color: var(--kbf-color-title-muted, var(--kbf-color-muted, #64748b));
+}
+
+.fs-subtitle--light   { color: rgba(255,255,255,0.9); }
+/* Ruling 24: primary used as text → link token */
+.fs-subtitle--primary { color: var(--kbf-color-link, var(--kbf-color-primary, #00293C)); }
+
+.fs-body {
+  font: var(--kbf-type-body, 400 1.1rem/1.7 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-body-tracking, normal);
+  text-transform: var(--kbf-type-body-transform, none);
+  margin: 0;
+  /* Title/Final Body Text; unset, Body Text. */
+  color: var(--kbf-color-title-text, var(--kbf-color-text, #1e293b));
+  white-space: pre-wrap;
+}
+
+.fs-body--light { color: rgba(255,255,255,0.85); }
+
+.fs-complete-btn {
+  margin-top: 0.5rem;
+}
+
+/* The ring is drawn outside the button, on the veil, the one place the scrim changes what a non-text colour
+   sits on. The series' ring on the dark veil's worst composite can be 2.65:1, under 1.4.11's 3:1, so it
+   takes the endpoint rule the text does and goes white there. */
+.fs-scrim-dark .fs-complete-btn:focus-visible { outline-color: #ffffff; }
+
+.fs-complete-btn--light {
+  background-color: rgba(255,255,255,0.9);
+  /* Background is literal white, so the passing endpoint is fixed: #1e293b on white is 14.6:1.
+     No derived token applies here: --kbf-color-on-primary runs over themable backgrounds, and this
+     face is not one. */
+  color: #1e293b;
+}
+

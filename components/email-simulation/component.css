@@ -1,0 +1,157 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.es-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+}
+
+/* The email card is #ffffff with a #dad8da border, hardcoded, because it is the mail client this
+   mocks — CLAUDE.md keeps it that way. So every foreground inside it is pinned too, at the value its
+   `var()` fallback already supplied: a themed colour over a fixed background cannot promise a ratio,
+   and under a dark palette --kbf-color-text (#e5e7eb) on this card measured 1.23:1 and
+   --kbf-color-muted (#9ca3af) 2.53:1. Same fix, and the same reasoning, as `.cs-input-pill` in
+   chat-simulation.
+
+   Unchanged on an unthemed module, byte for byte. Measured: #1e293b on #ffffff 14.63:1;
+   #64748b on #ffffff 4.76:1, which clears 4.5:1 with little to spare.
+
+   The avatar, the attachment chip and the Got it button are *not* pinned: each paints a themable
+   background of its own and carries the matching derived foreground, so both halves of those pairs
+   move together. What is pinned is the card.
+
+   STAGE3-NEEDS: --kbf-type-artifact-* tokens once the artifact domain is emitted by looks.ts.
+   Selectors marked [artifact] use fixed app-like sizes per ruling 12 (Checkpoint 1, 2026-09-25).
+   STAGE3-NEEDS: --kbf-radius-artifact-md (6px) for attachment chip once artifact radius tokens land. */
+
+.es-email {
+  background-color: #ffffff;
+  border: 1px solid #dad8da;
+  box-shadow: var(--kbf-shadow-mid, 0 4px 12px rgba(0,0,0,0.12));
+  width: 100%;
+  max-width: 640px;
+}
+
+.es-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+  gap: 1rem;
+}
+
+/* [artifact] headingL — 20px initials; circle dimensions govern layout */
+.es-avatar {
+  width: 3rem;
+  height: 3rem;
+  min-width: 3rem;
+  border-radius: var(--kbf-radius-full, 50%);
+  background-color: var(--kbf-color-primary, #00293C);
+  color: var(--kbf-color-on-primary, #ffffff);
+  font: var(--kbf-type-artifact-heading-l, 600 20px/1.3 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-heading-l-tracking, normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.es-meta { flex: 1; min-width: 0; }
+
+/* [artifact] body — 15px, sender/subject lines */
+.es-from,
+.es-subject {
+  font: var(--kbf-type-artifact-body, 400 15px/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-body-tracking, normal);
+  /* Pinned: the card's #ffffff. See the note above. */
+  color: #1e293b;
+  margin: 0.2rem 0;
+  /* Wraps, never an ellipsis (2026-10-23): the sender's address is often the clue the email is a fake,
+     and on a phone the ellipsis cut it off before the domain. A long address breaks anywhere rather
+     than running off the card. */
+  overflow-wrap: anywhere;
+}
+
+/* [artifact] label — 14px (raised from 13.6px, was below floor) */
+.es-label {
+  font: var(--kbf-type-artifact-label, 400 0.875rem/1.45 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-label-tracking, normal);
+  /* Pinned: the card's #ffffff. */
+  color: #64748b;
+}
+
+/* [artifact] meta — 12px (a date: caption; meta is the one role allowed below 14px) */
+.es-date {
+  font: var(--kbf-type-artifact-meta, 400 0.75rem/1.45 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-meta-tracking, normal);
+  /* Pinned: the card's #ffffff. */
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+/* [artifact] body — 15px, email prose */
+.es-body {
+  padding: 1rem 1.25rem;
+  font: var(--kbf-type-artifact-body, 400 15px/1.7 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-body-tracking, normal);
+  /* Pinned: the card's #ffffff. */
+  color: #1e293b;
+  min-height: 3rem;
+  white-space: pre-wrap;
+}
+
+.es-body a { pointer-events: none; color: inherit; text-decoration: underline; }
+
+.es-attachment {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px dotted #ccc;
+}
+
+.es-attachment[hidden] { display: none; }
+
+/* [artifact] eyebrow — 14px uppercase (raised from 12.8px, was below floor) */
+.es-attachment-label {
+  font: var(--kbf-type-artifact-eyebrow, 600 0.875rem/1.45 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-eyebrow-tracking, 0.05em);
+  text-transform: var(--kbf-type-artifact-eyebrow-transform, uppercase);
+  /* Pinned: the card's #ffffff. */
+  color: #64748b;
+  margin: 0 0 0.5rem;
+}
+
+.es-attachment-list { list-style: none; padding: 0; margin: 0; }
+
+/* STAGE3-NEEDS: artifact md radius (6px) once --kbf-radius-artifact-md token lands */
+.es-attachment-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--kbf-color-border, #00293c);
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+  background: var(--kbf-color-bg, #f8fafc);
+  text-decoration: none;
+  color: var(--kbf-color-text, #1e293b);
+  pointer-events: none;
+}
+
+/* [artifact] data — 14px, filename */
+.es-attachment-name {
+  font: var(--kbf-type-artifact-data, 400 0.875rem/1.45 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-data-tracking, normal);
+}
+
+/* Got it button — course chrome, not the email mock */
+.es-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 640px;
+}
+

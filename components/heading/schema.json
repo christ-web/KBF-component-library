@@ -1,0 +1,89 @@
+{
+  "version": 2,
+  "category": "Text",
+  "icon": "heading",
+  "completion": "auto",
+  "styleTokens": [
+    "--kbf-color-heading",
+    "--kbf-font-heading"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    },
+    {
+      "key": "design",
+      "label": "Design",
+      "owner": "dev",
+      "order": 2
+    }
+  ],
+  "fields": {
+    "text": {
+      "label": "Heading text",
+      "group": "content",
+      "required": true,
+      "type": "text",
+      "order": 0
+    },
+    "level": {
+      "label": "Heading level",
+      "group": "content",
+      "default": "h2",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1 — the page title"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "help": "Use one H1 per page, and do not skip a level going down.",
+      "type": "select",
+      "order": 1
+    },
+    "align": {
+      "label": "Alignment",
+      "group": "design",
+      "ga": true,
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centered"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "type": "select",
+      "order": 2
+    }
+  }
+}

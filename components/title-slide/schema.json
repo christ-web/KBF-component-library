@@ -1,0 +1,92 @@
+{
+  "version": 2,
+  "category": "Slides & Layout",
+  "icon": "file-text",
+  "completion": "auto",
+  "styleTokens": [
+    "--kbf-color-bg",
+    "--kbf-color-heading",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-font-body",
+    "--kbf-font-heading",
+    "--kbf-font-title",
+    "--kbf-color-title-bg",
+    "--kbf-color-title-heading",
+    "--kbf-color-title-muted",
+    "--kbf-gradient-from",
+    "--kbf-gradient-to"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    },
+    {
+      "key": "design",
+      "label": "Design",
+      "owner": "dev",
+      "order": 2
+    }
+  ],
+  "fields": {
+    "title": {
+      "label": "Title",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "subtitle": {
+      "label": "Subtitle (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 1
+    },
+    "background_image": {
+      "optional": true,
+      "label": "Background image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 2048,
+        "height": 1536,
+        "crop": true,
+        "note": "Cropped to fill the page, so keep the subject near the center."
+      },
+      "type": "url",
+      "order": 2
+    },
+    "align": {
+      "label": "Text alignment",
+      "group": "design",
+      "ga": true,
+      "options": [
+        {
+          "value": "center",
+          "label": "Centered"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "type": "select",
+      "order": 3
+    },
+    "scrim": {
+      "label": "Fade the background image behind the text",
+      "group": "design",
+      "ga": true,
+      "default": true,
+      "help": "Keeps the title and subtitle readable over a photo. Ignored when no background image is set.",
+      "type": "boolean",
+      "order": 4
+    }
+  }
+}

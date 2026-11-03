@@ -1,0 +1,28 @@
+<div class="es-wrapper">
+  <div class="es-email" role="article" aria-label="Email">
+    <div class="es-header">
+      <div class="es-avatar" id="es-avatar" aria-hidden="true"></div>
+      <div class="es-meta">
+        <div class="es-from"><span class="es-label">From:</span> <strong id="es-from"></strong></div>
+        <div class="es-subject"><span class="es-label">Subject:</span> <strong id="es-subject"></strong></div>
+        <div class="es-date" id="es-date" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="es-body" id="es-body"></div>
+    <div class="es-attachment" id="es-attachment" hidden>
+      <p class="es-attachment-label">Attachment</p>
+      <ul class="es-attachment-list">
+        <!-- No `aria-label` here: a static one replaced the filename this link contains. `component.js`
+             sets it to "Attachment: <filename>" when there is an attachment to announce, and the whole
+             block stays `hidden` when there is not. -->
+        <li><a class="es-attachment-link" id="es-attachment-link" href="#">
+          <span class="es-attachment-icon" aria-hidden="true">
+            <svg width="28" height="36" viewBox="0 0 28 36" fill="none"><rect x="1" y="1" width="26" height="34" rx="3" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/><path d="M7 14h14M7 19h14M7 24h9" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="es-attachment-name" id="es-attachment-name"></span>
+        </a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="es-actions" id="es-actions"></div>
+</div>

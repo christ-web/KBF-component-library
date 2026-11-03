@@ -1,0 +1,33 @@
+<div class="vp-wrapper" id="vp-wrapper">
+  <h3 class="vp-title" id="vp-title"></h3>
+  <div class="vp-stage" id="vp-stage">
+    <video class="vp-video" id="vp-video" playsinline preload="metadata"></video>
+    <!-- `role="group"` is load-bearing, not decoration: `aria-label` on a plain div with no role is
+         prohibited by ARIA and screen readers drop it, so this bar had no accessible name at all.
+         `group` rather than `toolbar` — `toolbar` promises arrow-key movement between the controls,
+         which this component does not implement. -->
+    <div class="vp-controls" id="vp-controls" role="group" aria-label="Video controls">
+      <button class="vp-btn vp-play-pause" id="vp-play-pause" type="button" aria-label="Play"></button>
+      <div class="vp-progress-wrap" id="vp-progress-wrap" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+        <div class="vp-progress-bar" id="vp-progress-bar"></div>
+      </div>
+      <span class="vp-time" id="vp-time" aria-hidden="true">0:00 / 0:00</span>
+      <button class="vp-btn vp-mute-btn" id="vp-mute-btn" type="button" aria-label="Mute"></button>
+      <button class="vp-btn vp-cc-btn" id="vp-cc-btn" type="button" aria-label="Captions" aria-pressed="false">CC</button>
+      <button class="vp-btn vp-fs-btn" id="vp-fs-btn" type="button" aria-label="Fullscreen"></button>
+    </div>
+    <div class="vp-end-card" id="vp-end-card" hidden>
+      <button class="vp-replay-btn" id="vp-replay-btn" type="button">Replay</button>
+    </div>
+  </div>
+  <div class="vp-transcript-bar" id="vp-transcript-bar" style="display:none;">
+    <button class="vp-transcript-toggle kbf-btn kbf-btn--secondary" id="vp-transcript-toggle" type="button" aria-expanded="false">Show Transcript</button>
+  </div>
+  <!-- The transcript scrolls (max-height: 13rem), so it takes focus — cues below the fold were
+       unreachable without a pointer (WCAG 2.1.1). Safe to declare in markup: while collapsed the
+       element is `hidden`, so it stays out of the tab order. -->
+  <div class="vp-transcript" id="vp-transcript" hidden aria-live="polite"
+       tabindex="0" role="region" aria-label="Transcript">
+    <ul class="vp-cue-list" id="vp-cue-list"></ul>
+  </div>
+</div>

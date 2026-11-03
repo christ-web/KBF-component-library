@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KBF component preview</title>
+  <link rel="stylesheet" href="harness.css">
+</head>
+<body>
+  <header class="bar">
+    <h1>KBF component preview</h1>
+    <p class="hint">Runs your component the way KBF does. Save a file and it rebuilds.</p>
+  </header>
+
+  <div class="layout">
+    <aside class="controls" aria-label="Preview controls">
+      <section>
+        <h2>Component</h2>
+        <label for="component">Component folder</label>
+        <select id="component"></select>
+        <p id="component-warning" class="warning" role="status" hidden></p>
+      </section>
+
+      <section>
+        <h2>Course look</h2>
+        <label for="look">Look</label>
+        <select id="look"></select>
+        <fieldset>
+          <legend>Theme</legend>
+          <label class="inline"><input type="radio" name="scheme" value="light" checked> Light</label>
+          <label class="inline"><input type="radio" name="scheme" value="dark"> Dark</label>
+        </fieldset>
+        <label for="size">Screen size</label>
+        <select id="size">
+          <option value="1000x596">Desktop (1000 × 596, a page in KBF's player)</option>
+          <option value="768x596">Tablet (768 wide)</option>
+          <option value="375x596">Phone (375 wide)</option>
+        </select>
+      </section>
+
+      <section>
+        <h2>Learner</h2>
+        <label class="inline"><input type="checkbox" id="lock"> Lock Next until the component completes</label>
+        <div class="buttons">
+          <button type="button" id="fresh">Start fresh</button>
+          <button type="button" id="resume" aria-describedby="resume-why">Reload as a resume</button>
+        </div>
+        <p id="resume-why" class="hint">Reopens the page with the state your component last saved, as when a learner comes back.</p>
+      </section>
+
+      <section>
+        <h2>Accessibility</h2>
+        <button type="button" id="axe">Run the accessibility check</button>
+        <div id="axe-result" role="status"></div>
+      </section>
+    </aside>
+
+    <main class="stage-area">
+      <div class="stage" id="stage">
+        <iframe id="frame" title="Component preview"></iframe>
+      </div>
+      <nav class="mock-nav" aria-label="Pretend course navigation">
+        <button type="button" disabled>Previous</button>
+        <span id="lock-status" role="status"></span>
+        <button type="button" id="next">Next</button>
+      </nav>
+
+      <div class="panels">
+        <section class="panel">
+          <h2><label for="config">Settings (<code>kbf.config</code>)</label></h2>
+          <textarea id="config" spellcheck="false" rows="14" aria-describedby="config-why"></textarea>
+          <p id="config-why" class="hint">The values your component receives. Starts from the defaults in settings.js. Kept per component in this browser.</p>
+          <p id="config-error" class="warning" role="alert" hidden></p>
+          <div class="buttons">
+            <button type="button" id="apply">Apply settings</button>
+            <button type="button" id="defaults">Back to defaults</button>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>What your component told KBF</h2>
+          <ol id="log" class="log" aria-live="polite"></ol>
+          <button type="button" id="clear-log">Clear</button>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="harness.js"></script>
+</body>
+</html>

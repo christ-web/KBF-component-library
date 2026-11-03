@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "category": "Media",
+  "icon": "volume-2",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-color-bg",
+    "--kbf-color-border",
+    "--kbf-color-heading",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-color-surface",
+    "--kbf-color-text",
+    "--kbf-font-body",
+    "--kbf-font-heading"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "src": {
+      "label": "Audio file (.mp3 / .ogg)",
+      "group": "content",
+      "accept": "audio",
+      "type": "url",
+      "order": 0
+    },
+    "cover_image": {
+      "optional": true,
+      "label": "Cover art image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 400,
+        "height": 400,
+        "crop": true,
+        "note": "Cropped to a square."
+      },
+      "type": "url",
+      "order": 1
+    },
+    "vtt": {
+      "label": "Transcript VTT",
+      "group": "content",
+      "accept": "caption",
+      "warnWhenEmpty": "No transcript: this audio will ship without one, which fails WCAG 1.2.1 (Level A). Add a VTT file.",
+      "type": "url",
+      "order": 2
+    },
+    "blocking": {
+      "label": "Learner must finish this to go on",
+      "group": "content",
+      "default": true,
+      "whenLocked": true,
+      "help": "Holds the page until 95% of the audio is heard. Off, this audio does not hold it.",
+      "type": "boolean",
+      "order": 3
+    }
+  }
+}

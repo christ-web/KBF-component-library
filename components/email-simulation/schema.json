@@ -1,0 +1,61 @@
+{
+  "version": 2,
+  "category": "Interactives",
+  "icon": "mail",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-bg",
+    "--kbf-color-border",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-color-text",
+    "--kbf-font-body"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "from": {
+      "label": "Sender name and/or email",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "subject": {
+      "label": "Email subject line",
+      "group": "content",
+      "type": "text",
+      "order": 1
+    },
+    "body": {
+      "label": "Email body (plain text or basic HTML)",
+      "group": "content",
+      "type": "textarea",
+      "order": 2
+    },
+    "attachment_name": {
+      "label": "Attachment filename (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 3
+    },
+    "attachment_link": {
+      "label": "Attachment URL (optional)",
+      "group": "content",
+      "type": "url",
+      "order": 4
+    },
+    "blocking": {
+      "label": "Show 'Got it' button before advancing",
+      "group": "content",
+      "type": "boolean",
+      "order": 5
+    }
+  }
+}

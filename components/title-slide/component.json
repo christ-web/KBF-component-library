@@ -1,0 +1,5 @@
+{
+  "name": "Title Slide",
+  "version": "2.2.2",
+  "changes": "The background slot recommends 2048x1536, twice the 1024x768 stage (Chris, 2026-10-23), in place of 1920x1080."
+}

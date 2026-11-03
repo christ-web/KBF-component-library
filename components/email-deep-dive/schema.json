@@ -1,0 +1,161 @@
+{
+  "version": 2,
+  "category": "Interactives",
+  "icon": "mail-search",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-bg",
+    "--kbf-color-border",
+    "--kbf-color-correct",
+    "--kbf-color-heading",
+    "--kbf-color-incorrect",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-color-surface",
+    "--kbf-color-text",
+    "--kbf-font-body",
+    "--kbf-font-heading",
+    "--kbf-color-hover-bg",
+    "--kbf-color-hover-text"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "from": {
+      "label": "Sender display name / address",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "to": {
+      "label": "Recipient display name / address",
+      "group": "content",
+      "type": "text",
+      "order": 1
+    },
+    "subject": {
+      "label": "Email subject",
+      "group": "content",
+      "type": "text",
+      "order": 2
+    },
+    "date": {
+      "label": "Date/time string (e.g. Mon, June 2 at 10:14 AM)",
+      "group": "content",
+      "type": "text",
+      "order": 3
+    },
+    "body": {
+      "label": "Email body (plain text or basic HTML)",
+      "group": "content",
+      "type": "textarea",
+      "order": 4
+    },
+    "flag1_label": {
+      "label": "Flag 1 label (e.g. 'Sender address')",
+      "group": "content",
+      "type": "text",
+      "order": 5
+    },
+    "flag1_type": {
+      "label": "Flag 1 type: red (suspicious) or safe",
+      "group": "content",
+      "type": "text",
+      "order": 6
+    },
+    "flag1_explanation": {
+      "label": "Flag 1 explanation shown to learner",
+      "group": "content",
+      "type": "textarea",
+      "order": 7
+    },
+    "flag2_label": {
+      "label": "Flag 2 label (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 8
+    },
+    "flag2_type": {
+      "label": "Flag 2 type: red or safe (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 9
+    },
+    "flag2_explanation": {
+      "label": "Flag 2 explanation (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 10
+    },
+    "flag3_label": {
+      "label": "Flag 3 label (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 11
+    },
+    "flag3_type": {
+      "label": "Flag 3 type: red or safe (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 12
+    },
+    "flag3_explanation": {
+      "label": "Flag 3 explanation (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 13
+    },
+    "flag4_label": {
+      "label": "Flag 4 label (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 14
+    },
+    "flag4_type": {
+      "label": "Flag 4 type: red or safe (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 15
+    },
+    "flag4_explanation": {
+      "label": "Flag 4 explanation (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 16
+    },
+    "flag5_label": {
+      "label": "Flag 5 label (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 17
+    },
+    "flag5_type": {
+      "label": "Flag 5 type: red or safe (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 18
+    },
+    "flag5_explanation": {
+      "label": "Flag 5 explanation (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 19
+    },
+    "blocking": {
+      "label": "Learner must finish this to go on",
+      "group": "content",
+      "default": true,
+      "whenLocked": true,
+      "help": "Holds the page until every flag is reviewed. Off, this email does not hold it.",
+      "type": "boolean",
+      "order": 20
+    }
+  }
+}

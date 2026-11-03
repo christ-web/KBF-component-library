@@ -1,0 +1,5 @@
+{
+  "name": "Content Slide",
+  "version": "1.1.1",
+  "changes": "For the 1024x768 stage (Chris, 2026-10-23): image-left and image-right stack, image first, on a narrow page; the image is a 4:3 frame, cropped to it, at most half the page's height; the image slot recommends 1200x900 and the background 2048x1536."
+}

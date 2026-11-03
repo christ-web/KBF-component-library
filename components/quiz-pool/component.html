@@ -1,0 +1,34 @@
+<div class="qp-wrapper" id="qp-wrapper">
+  <!-- Quiz stage -->
+  <div class="qp-quiz" id="qp-quiz">
+    <div class="qp-progress" id="qp-progress" aria-hidden="true">
+      <span class="qp-progress-text" id="qp-progress-text"></span>
+      <div class="qp-dots" id="qp-dots"></div>
+    </div>
+    <div class="qp-card" id="qp-card">
+      <h2 class="qp-question" id="qp-question" tabindex="-1"></h2>
+      <p class="qp-instructions" id="qp-instructions" hidden>Select all that apply.</p>
+      <div class="qp-options" id="qp-options" role="radiogroup" aria-labelledby="qp-question"></div>
+      <div class="qp-controls">
+        <button class="qp-submit-btn kbf-btn" id="qp-submit" type="button" disabled aria-disabled="true">Submit</button>
+      </div>
+      <div class="qp-feedback" id="qp-feedback" hidden role="alert" aria-live="assertive" tabindex="-1">
+        <div class="qp-feedback-inner">
+          <div class="qp-feedback-icon" id="qp-feedback-icon" aria-hidden="true"></div>
+          <div class="qp-feedback-text" id="qp-feedback-text"></div>
+          <button class="qp-next-btn kbf-btn" id="qp-next" type="button"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results screen -->
+  <div class="qp-results" id="qp-results" hidden>
+    <div class="qp-results-card" id="qp-results-card">
+      <div class="qp-results-icon" id="qp-results-icon" aria-hidden="true"></div>
+      <h2 class="qp-results-title" id="qp-results-title" tabindex="-1"></h2>
+      <p class="qp-results-message" id="qp-results-message"></p>
+      <button class="qp-retry-btn kbf-btn kbf-btn--secondary" id="qp-retry" type="button">Try Again</button>
+    </div>
+  </div>
+</div>

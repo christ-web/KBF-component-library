@@ -1,0 +1,87 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.tc-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tab strip */
+.tc-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--kbf-color-border, #00293c);
+  /* Transparent (Chris, 2026-10-22): every unselected tab paints its own Track and the
+     tabs fill the row, so the strip is only ever seen through the selected tab — where a see-through Surface
+     / Cards has to show the page, as it does on every other component, and as the panel measures it. */
+  background-color: transparent;
+}
+
+/* Each tab is the shared tab (`kbf-tab` in the runtime's CONTROLS_CSS): no border, idle on Track with
+   Body Text (it was a fixed #ececec with the text pinned to match, which froze a light strip into a dark
+   module), selected on Surface with a 3px Primary bar along its top, the series' hover, and the
+   keyboard-only Focus Ring. The tabs sit a little apart so each reads as its own. */
+.tc-tabs { gap: 0.25rem; padding-bottom: 0.25rem; }
+
+.tc-tab {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  font: var(--kbf-type-body-strong, 600 1rem/1.5 system-ui, sans-serif);
+  /* A label wraps inside its tab rather than running over the next one (2026-10-23): on a phone four
+     tabs share 375px, and a label that could not wrap drew across its neighbour. `min()` lets a tab
+     narrower than 6rem exist at all when the strip itself is. */
+  min-width: min(6rem, 100%);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.tc-tab > span:first-child { min-width: 0; }
+
+/* ruling 24: accent as text → link token so contrast holds under Warm and any future look */
+.tc-tab[aria-selected="true"] { color: var(--kbf-color-link, var(--kbf-color-primary, #00293C)); }
+
+/* The tick says a tab was viewed. On an idle tab it is the tab's own text colour, Body Text on Track, a pair
+   the letter badges already rest on; a themed green there was measured against nothing. On the selected
+   tab it is Correct on Surface, which the panel measures. The words are in `.tc-sr-only`. */
+.tc-tab-check {
+  color: currentColor;
+  font-size: 1em;    /* glyph: inherits the tab's size, per role map */
+  flex-shrink: 0;
+}
+
+.tc-tab[aria-selected="true"] .tc-tab-check {
+  color: var(--kbf-color-correct, #15803d);
+}
+
+/* The "viewed" state in words, for the learners the green tick alone never reached. Clipped rather
+   than `display:none` or `visibility:hidden`, either of which would take it out of the accessibility
+   tree along with the pixels. It only exists inside `.tc-tab-check`, which is `display:none` until
+   the tab has actually been viewed. */
+.tc-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Panel */
+.tc-panels { flex: 1; }
+
+.tc-panel {
+  padding: clamp(1.25rem, 5vw, 3rem);
+  color: var(--kbf-color-text, #1e293b);
+  font: var(--kbf-type-body, 400 1rem/1.7 system-ui, sans-serif);
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+  white-space: pre-wrap;
+  animation: tc-fadein var(--kbf-duration-base, 0.2s) var(--kbf-ease-entrance, ease-out);
+}
+
+.tc-panel[hidden] { display: none; }
+
+@keyframes tc-fadein {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

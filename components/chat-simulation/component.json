@@ -1,0 +1,5 @@
+{
+  "name": "Chat Simulation",
+  "version": "1.1.2",
+  "changes": "The phone fits the page (2026-10-23): its messages scroll inside it, which at a flat 26rem ran 3px past a 1024x768 stage's page."
+}

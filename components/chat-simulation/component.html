@@ -1,0 +1,29 @@
+<div class="cs-wrapper">
+  <div class="cs-phone">
+    <div class="cs-header">
+      <div class="cs-avatar" id="cs-avatar">
+        <svg class="cs-avatar-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <circle cx="14" cy="10" r="5" fill="rgba(255,255,255,0.6)"/>
+          <path d="M4 26c0-5.523 4.477-10 10-10s10 4.477 10 10" fill="rgba(255,255,255,0.5)"/>
+        </svg>
+      </div>
+      <div class="cs-contact" id="cs-contact">Contact</div>
+    </div>
+    <!-- The region label and the tabindex both live on `.cs-body` rather than on `.cs-phone`,
+         because this is the element that scrolls: a keyboard-only learner couldn't reach messages
+         above or below the fold otherwise (WCAG 2.1.1). -->
+    <div class="cs-body" id="cs-body" tabindex="0" role="region" aria-label="Chat conversation">
+      <div class="cs-messages" id="cs-messages">
+        <!-- Messages injected by JS -->
+      </div>
+    </div>
+    <div class="cs-footer">
+      <div class="cs-input-bar" aria-hidden="true">
+        <div class="cs-input-pill">iMessage</div>
+        <div class="cs-camera-icon" aria-hidden="true">
+          <svg width="22" height="18" viewBox="0 0 22 18" fill="none"><rect x="1" y="3" width="20" height="14" rx="3" stroke="currentColor" stroke-width="1.5"/><circle cx="11" cy="10" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 3l1.5-2h5L15 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

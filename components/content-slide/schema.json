@@ -1,0 +1,111 @@
+{
+  "version": 2,
+  "category": "Slides & Layout",
+  "icon": "file-text",
+  "completion": "auto",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-bg",
+    "--kbf-color-heading",
+    "--kbf-color-text",
+    "--kbf-font-body",
+    "--kbf-font-heading"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    },
+    {
+      "key": "design",
+      "label": "Design",
+      "owner": "dev",
+      "order": 2
+    }
+  ],
+  "fields": {
+    "heading": {
+      "label": "Heading",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "body": {
+      "label": "Body text",
+      "group": "content",
+      "type": "textarea",
+      "order": 1
+    },
+    "image_url": {
+      "optional": true,
+      "altField": "image_alt",
+      "label": "Image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 1200,
+        "height": 900,
+        "crop": true,
+        "note": "Shown in a 4:3 frame and cropped to it."
+      },
+      "type": "url",
+      "order": 2
+    },
+    "image_alt": {
+      "label": "Image alt text",
+      "group": "content",
+      "type": "text",
+      "order": 3
+    },
+    "layout": {
+      "label": "Layout",
+      "group": "design",
+      "ga": true,
+      "options": [
+        {
+          "value": "text-only",
+          "label": "Text only"
+        },
+        {
+          "value": "image-right",
+          "label": "Image on the right"
+        },
+        {
+          "value": "image-left",
+          "label": "Image on the left"
+        },
+        {
+          "value": "image-top",
+          "label": "Image above the text"
+        }
+      ],
+      "type": "select",
+      "order": 4
+    },
+    "bg_image": {
+      "optional": true,
+      "label": "Full background image (optional)",
+      "group": "design",
+      "accept": "image",
+      "size": {
+        "width": 2048,
+        "height": 1536,
+        "crop": true,
+        "note": "Cropped to fill the page, so keep the subject near the center."
+      },
+      "type": "url",
+      "order": 5
+    },
+    "scrim": {
+      "label": "Fade the background image behind the text",
+      "group": "design",
+      "ga": true,
+      "default": true,
+      "help": "Keeps the heading and body readable over a photo. Ignored when no background image is set.",
+      "type": "boolean",
+      "order": 6
+    }
+  }
+}

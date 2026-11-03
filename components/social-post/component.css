@@ -1,0 +1,134 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.sp-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+/* The card is #ffffff with a #dad8da border and #e5e5e5 dividers, hardcoded, because it is the social
+   app this mocks — CLAUDE.md keeps it that way. So every foreground on it is pinned too, at the value
+   its `var()` fallback already supplied: a themed colour over a fixed background cannot promise a
+   ratio, and under a dark palette --kbf-color-text (#e5e7eb) on this card measured 1.23:1 and
+   --kbf-color-muted (#9ca3af) 2.53:1. Same fix, and the same reasoning, as `.cs-input-pill` in
+   chat-simulation.
+
+   Unchanged on an unthemed module, byte for byte. Measured: #1e293b on #ffffff 14.63:1;
+   #64748b on #ffffff 4.76:1, which clears 4.5:1 with little to spare; #00293C 15.19:1.
+
+   The avatar keeps --kbf-color-primary: it is a themable background in its own right, not a
+   foreground on the card. */
+
+.sp-card {
+  background-color: #ffffff;
+  border: 1px solid #dad8da;
+  box-shadow: var(--kbf-shadow-mid, 0 3px 6px rgba(0, 0, 0, 0.1));
+  width: 100%;
+  max-width: 26rem;
+}
+
+/* Header */
+.sp-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem;
+}
+
+.sp-avatar {
+  width: 3rem;
+  height: 3rem;
+  min-width: 3rem;
+  border-radius: var(--kbf-radius-full, 50%);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: var(--kbf-color-primary, #00293C);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sp-avatar--has-image .sp-avatar-placeholder { display: none; }
+
+.sp-identity { display: flex; flex-direction: column; }
+
+.sp-username {
+  /* artifact headingM — 17px, fixed per ruling 12 (app-like artifact type set) */
+  font-size: 1.0625rem;
+  font-weight: 700;
+  /* Pinned: the card's #ffffff. See the note above. */
+  color: #1e293b;
+  margin: 0 0 0.2rem;
+}
+
+.sp-location {
+  /* artifact meta — 12px timestamp/location, fixed per ruling 12 */
+  font-size: 0.75rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Post image */
+.sp-image-wrap { border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; }
+/* 4:3, the stage's shape (Chris, 2026-10-23), filled and cropped as the slot's recommended size says. */
+.sp-image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+
+/* Actions bar */
+.sp-actions {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.sp-action {
+  flex: 1;
+  text-align: center;
+  padding: 0.65rem 0;
+  /* artifact data — 14px, fixed per ruling 12 */
+  font-size: 0.875rem;
+  color: #1e293b;
+  border-left: 1px solid #e5e5e5;
+}
+
+.sp-action:first-child { border-left: none; }
+
+/* Body */
+.sp-body {
+  padding: 0.6rem 0.8rem 0.4rem;
+  /* artifact body — 15px, fixed per ruling 12 */
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #1e293b;
+  white-space: pre-wrap;
+}
+
+/* Bold, not colour alone. Against the body's #1e293b the navy is 1.04:1 — indistinguishable — and
+   even the old sky blue only worked for a sighted user with normal colour vision, which WCAG 1.4.1
+   (Level A) does not allow to be the sole cue. The weight carries the distinction on its own, which
+   is what makes pinning the colour cost nothing: this used to read --kbf-color-primary, and a light
+   themed primary on the card's fixed #ffffff is a 1.4.3 failure with no cue lost by fixing it
+   (#fbbf24 measures 1.91:1). The navy is 15.19:1. */
+.sp-hashtag {
+  color: #00293C;
+  font-weight: 600;
+}
+
+/* Footer */
+.sp-footer {
+  padding: 0 0.8rem 0.8rem;
+}
+
+.sp-time {
+  /* artifact meta — 12px timestamp, fixed per ruling 12 */
+  font-size: 0.75rem;
+  color: #64748b;
+}

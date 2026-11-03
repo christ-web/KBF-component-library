@@ -1,0 +1,290 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.am-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.am-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+/* Each tile is the shared tile (`kbf-tile` in the runtime's CONTROLS_CSS): no border, the look's large
+   radius, Surface, the series' hover with the mid shadow, and the keyboard-only Focus Ring. Its cover and
+   play glyph are its own. */
+.am-tile {
+  padding: 0.5rem;
+  text-align: center;
+  max-width: 180px;
+  flex: 1 1 140px;
+}
+
+.am-cover-wrap {
+  position: relative;
+  display: inline-block;
+  width: min(15.6vw, 140px);
+  height: min(15.6vw, 140px);
+  min-width: 100px;
+  min-height: 100px;
+  background-size: cover;
+  background-position: center;
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+  box-shadow: var(--kbf-shadow-low, 0 3px 6px rgba(0, 0, 0, 0.16));
+  border-radius: var(--kbf-radius-xs, 4px);
+  margin: 0 auto;
+}
+
+.am-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: var(--kbf-radius-full, 50%);
+  box-shadow: var(--kbf-shadow-low, 0 3px 6px rgba(0, 0, 0, 0.16));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--kbf-color-primary, #00293C);
+}
+
+.am-done-badge {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  display: none;
+}
+
+.am-tile--done .am-done-badge { display: block; }
+
+.am-tile-title {
+  font: var(--kbf-type-body-strong, 600 1.0625rem/1.65 system-ui, sans-serif);
+  margin: 0.5rem 0 0;
+  color: var(--kbf-color-text, #1e293b);
+}
+
+.am-tile--done .am-tile-title { color: var(--kbf-color-correct, #15803d); }
+
+/* Overlay: the shared backdrop (`kbf-scrim`). */
+.am-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.am-overlay[hidden] { display: none; }
+.am-overlay:focus { outline: none; }
+
+.am-box {
+  background-color: var(--kbf-color-surface, #ffffff);
+  border-radius: var(--kbf-radius-lg, 12px);
+  box-shadow: var(--kbf-shadow-high, 0 8px 32px rgba(0, 0, 0, 0.33));
+  width: 100%;
+  max-width: 580px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* The close is the shared one (`kbf-close`): a 44px square on Track with Body Text, in the
+   box's top corner. It was a white cross on a 15% black wash, measured against nothing: it sits over the
+   transcript or, with none, over the grey stage. */
+
+/* Inline audio player inside modal */
+.am-player {
+  display: flex;
+  min-height: 180px;
+}
+
+.am-modal-stage {
+  position: relative;
+  padding: 2rem;
+  /* Was #9b9b9b, which is the exact failure audio-player already fixed on its own stage: white text —
+     `.am-modal-time` here — lands at 2.77:1, below AA's 4.5:1 and below even the 3:1 a UI component
+     needs, which the white `.am-modal-progress` track also sits at. #6b6b6b carries white at 5.40:1.
+     Fixed there and not here because this stage is built by JS and never appeared in a static scan. */
+  background-color: #6b6b6b;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+}
+
+.am-modal-cover {
+  background-size: cover;
+  background-position: center;
+  background-color: #ffffff;
+  width: 120px;
+  height: 120px;
+  border: 2px solid #ffffff;
+  box-shadow: var(--kbf-shadow-low, 0 3px 6px rgba(0, 0, 0, 0.16));
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.am-modal-play,
+.am-modal-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  transform: translate(-50%, -50%);
+  border-radius: var(--kbf-radius-full, 50%);
+  background-color: rgba(255, 255, 255, 0.75);
+  box-shadow: var(--kbf-shadow-low, 0 3px 6px rgba(0, 0, 0, 0.16));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  color: var(--kbf-color-primary, #00293C);
+}
+
+.am-modal-play:focus { outline: 2px solid var(--kbf-color-primary, #00293C); }
+
+.am-modal-controls {
+  margin-top: 0.5rem;
+  width: 100%;
+  color: #ffffff;
+}
+
+.am-modal-time {
+  font: var(--kbf-type-caption, 400 0.875rem/1.45 system-ui, sans-serif);
+  font-variant-numeric: tabular-nums;
+  display: block;
+  text-align: right;
+  margin-bottom: 0.25rem;
+}
+
+.am-modal-progress {
+  background: #ffffff;
+  border-radius: var(--kbf-radius-full, 2rem);
+  height: 0.6rem;
+  position: relative;
+  cursor: pointer;
+}
+/* The seek bar's hit area, 24px tall around the track you see (WCAG 2.5.8, Chris, 2026-10-28). The track
+   itself is unchanged; this strip only widens where a pointer lands. Horizontally it matches the track,
+   so the seek maths, which reads the track's own left edge and width, is unchanged. */
+.am-modal-progress::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 24px;
+  transform: translateY(-50%);
+}
+
+
+/* It holds `tabindex="0"` and now answers the arrow keys, so it has to show that it has focus
+   (WCAG 2.4.7). White on the grey stage, as on audio-player's identical control. */
+.am-modal-progress:focus { outline: 2px solid #ffffff; outline-offset: 2px; }
+
+/* Literal on purpose, exactly as on audio-player's identical control — see the note on
+   `.ap-progress-bar` there. The fill sits in the white `.am-modal-progress` track, not on the grey
+   stage, so the 1.4.11 pair is fill against white: a themable fill leaves it ungated and a dark
+   theme's pale primary reads 1.67:1. `#1e293b` on `#ffffff` is 14.6:1 and fixed. */
+.am-modal-bar {
+  background-color: #1e293b;
+  height: 100%;
+  width: 0;
+  border-radius: var(--kbf-radius-full, 2rem);
+  pointer-events: none;
+}
+
+/* Transcript panel — audio-player's, rule for rule, including both contrast notes it carries. It sits
+   beside the stage as a second flex child of `.am-player`, which is why the stage keeps `flex-shrink: 0`
+   and a `min-width`: the transcript takes the remaining width of the 580px modal. */
+.am-transcript-panel {
+  padding: 1.25rem;
+  flex: 1;
+  min-width: 0;
+  background-color: var(--kbf-color-surface, #ffffff);
+}
+
+.am-transcript-heading {
+  font: var(--kbf-type-heading-m, 600 1.5rem/1.3 system-ui, sans-serif);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0 0 0.6rem;
+  /* Clear of the 44px close in the box's corner. */
+  padding-right: 2.5rem;
+}
+
+.am-cues {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+/* Focusable for keyboard scrolling, so it needs a visible indicator (WCAG 2.4.7). */
+.am-cues:focus-visible {
+  outline: 2px solid var(--kbf-focus-ring, var(--kbf-color-primary, #00293C));
+  outline-offset: 2px;
+}
+
+.am-cue {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.55rem 0.5rem;
+  border-bottom: 1px solid var(--kbf-color-border, #00293c);
+  font: var(--kbf-type-body, 400 1.0625rem/1.65 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+  cursor: pointer;
+}
+
+.am-cue:last-child { border-bottom: none; }
+.am-cue:nth-child(odd) { background-color: rgba(0, 0, 0, 0.04); }
+
+.am-cue--active {
+  font-weight: 700;
+  border: 2px solid var(--kbf-color-primary, #00293C);
+  /* Derived from the token rather than a fixed rgba, so a module that themes primary does not leave a
+     tint from the old palette sitting against the new border. 6% is far too faint to affect the cue
+     text's contrast. */
+  background-color: color-mix(in srgb, var(--kbf-color-primary, #00293C) 6%, transparent) !important;
+}
+
+.am-cue-time {
+  /* Body Text, not a pinned #475569: the pin was for the light zebra tint, and on a dark series' Surface it
+     measured 1.69:1 (Warm, dark). Body Text clears 4.5:1 on Surface, and the 4% tint on odd rows barely moves it.
+     `--kbf-color-muted` stays out, at 4.36:1 on the tinted row. */
+  color: var(--kbf-color-text, #1e293b);
+  flex-shrink: 0;
+  font: var(--kbf-type-meta, 400 0.75rem/1.45 system-ui, sans-serif);
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes am-spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.am-spin {
+  animation: am-spin 1s linear infinite;
+  transform-origin: 50% 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

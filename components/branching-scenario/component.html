@@ -1,0 +1,23 @@
+<div class="bs-wrapper" id="bs-wrapper">
+  <!-- Step screen -->
+  <div class="bs-step" id="bs-step" hidden>
+    <div class="bs-step-card">
+      <div class="bs-breadcrumb" id="bs-breadcrumb"></div>
+      <div class="bs-situation" id="bs-situation"></div>
+      <!-- `role="group"` named by the situation, not `role="list"`: these are the choices for the
+           situation above, and a learner who tabs straight to the buttons hears what they are
+           choosing about. The buttons stay buttons — see component.js. -->
+      <div class="bs-choices" id="bs-choices" role="group" aria-labelledby="bs-situation"></div>
+    </div>
+  </div>
+
+  <!-- Outcome screen -->
+  <div class="bs-outcome" id="bs-outcome" hidden>
+    <div class="bs-outcome-card" id="bs-outcome-card">
+      <div class="bs-outcome-icon" id="bs-outcome-icon" aria-hidden="true"></div>
+      <h2 class="bs-outcome-title" id="bs-outcome-title" tabindex="-1"></h2>
+      <p class="bs-outcome-message" id="bs-outcome-message"></p>
+      <button class="bs-retry-btn kbf-btn kbf-btn--secondary" id="bs-retry-btn" type="button" style="display:none;"></button>
+    </div>
+  </div>
+</div>

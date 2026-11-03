@@ -1,0 +1,40 @@
+<div class="im-wrapper">
+  <!-- `role="group"` with a name, not `role="list"`: every child here is operable — clicking a tile is
+       the component's only interaction — and `role="list"` forces its children to be list items, which
+       is what silenced that. Same fix as branching-scenario's choices, reached from the other side.
+       The name is static because nothing in the settings panel titles this set. -->
+  <div class="im-tiles" id="im-tiles" role="group" aria-label="Topics">
+    <!-- Tile cards injected by JS -->
+  </div>
+  <!-- Modal overlay (position:fixed fills the iframe viewport) -->
+  <div
+    class="im-overlay kbf-scrim"
+    id="im-overlay"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    aria-label="Modal"
+  >
+    <!-- `.im-box` is the scroll container (max-height: 90vh), so it takes focus — the close button
+         was the only tabbable thing inside it, leaving long modal content unreachable by keyboard
+         (WCAG 2.1.1). The `tabindex` alone was not enough: the trap builds its cycle from
+         `box.querySelectorAll(...)`, which returns descendants only, so the box was excluded from its
+         own trap and Tab stayed pinned on the close button. See `tabbableStops` in component.js.
+
+         Being a tab stop is also why it needs a role and a name: a screen reader announced it as
+         nothing at all — the one thing on the page a learner could land on with no idea what it was.
+         `role="region"` plus a static name, the same shape `#cs-body` uses in chat-simulation (see
+         `e2e/scroll-regions.spec.ts`). Named separately from the dialog, which JS titles with the
+         tile's own heading, so the pair reads "Phishing, dialog" then "Topic detail, region". Found
+         by `e2e/component-sweep.spec.ts`. -->
+    <div class="im-box" id="im-box" tabindex="0" role="region" aria-label="Topic detail">
+      <button class="im-close kbf-close" id="im-close" type="button" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="im-body" id="im-body"></div>
+    </div>
+  </div>
+</div>

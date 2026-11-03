@@ -1,0 +1,23 @@
+<!--
+  Markup only. KBF puts this inside a shadow root of its own, so nothing on the page can restyle
+  it and nothing in component.css can leak out. Every element starts empty: component.js fills
+  in the words, because they come from the settings, never from here.
+
+  The page already has its own <h1> (the page title, for screen readers), so a component's own
+  title is an <h2>.
+-->
+<section class="rc" id="rc" aria-labelledby="rc-heading">
+  <div class="rc-media" id="rc-media" hidden>
+    <img class="rc-img" id="rc-img" alt="">
+  </div>
+  <div class="rc-body">
+    <h2 class="rc-heading" id="rc-heading"></h2>
+    <p class="rc-text" id="rc-text"></p>
+    <!-- `kbf-btn` is KBF's shared button: fill, focus ring, 44px touch target, hover. -->
+    <button type="button" class="kbf-btn rc-toggle" id="rc-toggle"
+            aria-expanded="false" aria-controls="rc-reveal"></button>
+    <div class="rc-reveal" id="rc-reveal" hidden>
+      <p class="rc-reveal-text" id="rc-reveal-text"></p>
+    </div>
+  </div>
+</section>

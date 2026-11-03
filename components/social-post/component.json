@@ -1,0 +1,5 @@
+{
+  "name": "Social Post",
+  "version": "1.1.2",
+  "changes": "The post image is a 4:3 frame, cropped to it (Chris, 2026-10-23); the slot recommends 900x675."
+}

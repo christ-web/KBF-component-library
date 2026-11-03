@@ -1,0 +1,5 @@
+{
+  "name": "Final Slide",
+  "version": "1.3.0",
+  "changes": "Buttons use the shared control recipe: filled, at least 44px, a 2px black or white edge, and one keyboard-only focus ring in Focus Ring (interactive elements phase 2)."
+}

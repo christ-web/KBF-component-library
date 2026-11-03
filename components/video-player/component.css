@@ -1,0 +1,272 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.vp-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.vp-title {
+  font: var(--kbf-type-heading-l, 700 1.25rem/1.2 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-heading-l-tracking, 0);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0 0 0.75rem;
+}
+
+.vp-stage {
+  position: relative;
+  background-color: #000;
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.vp-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* Controls bar
+   The veil reaches full strength *before* the controls start, and that is the whole fix here. It was
+   `linear-gradient(transparent, rgba(0, 0, 0, 0.75))` over the bar's whole height, so 0.75 arrived only
+   at the very bottom edge while the controls sit above it, around 0.375 — white on a pure-white video
+   frame fell to 2.63:1. A gradient behind a foreground is also a different measurement at every pixel,
+   which is the same reason a failing colour goes to black or white rather than one grey step darker.
+   So the fade is confined to the top padding and everything behind a control is one number: 0.7.
+   0.7 rather than the 0.535 white text alone needs, because `.vp-btn:hover` lays
+   rgba(255, 255, 255, 0.2) *between* the glyph and the scrim and lightens it — that hover shade is the
+   binding case at 0.669, and white over it clears 4.5:1 at 0.7 (4.94:1). Worked over a pure-white
+   frame throughout, the way ruling 1 does it: every darker frame only improves. */
+.vp-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0.7) 0.5rem,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  opacity: 1;
+  transition: opacity var(--kbf-duration-base, 0.3s) var(--kbf-ease-standard, ease);
+}
+
+.vp-controls.vp-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vp-stage:hover .vp-hidden,
+.vp-stage:focus-within .vp-hidden {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.vp-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: var(--kbf-radius-xs, 4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  /* icon buttons with no text: font-size dropped per role map; .vp-cc-btn overrides for "CC" label */
+}
+
+.vp-btn:hover { background: rgba(255, 255, 255, 0.2); }
+.vp-btn:focus { outline: 2px solid #ffffff; outline-offset: 2px; }
+
+/* "Captions are on", and it is deliberately not a colour.
+   This was `color: var(--kbf-color-primary)`, which put the bar's one state indicator at 1.3:1 on
+   the black scrim with the navy default — invisible before any theme touched it, and unmeasurable in
+   principle, since the scrim lies over whatever frame the video is paused on. A themed primary is no
+   better: the whole point of this bar's literal #ffffff is that white is the one foreground a video
+   still cannot swallow.
+   So the pressed state inverts the chip instead, which is the convention a native player already
+   uses and reads at a glance without hue: #000 on #ffffff is 21:1, and 17.4:1 on the hover shade.
+   `aria-pressed` on the button carries the same fact for AT, and carried it before this worked
+   visually at all. The :hover rule above is one specificity step higher, so the active state needs
+   its own hover or the chip vanishes under the pointer.
+   Black on white here is a literal-on-literal pair — see the ALLOWED_CSS note in
+   test_component_theme_literals.py. */
+.vp-btn--active {
+  background: #ffffff;
+  color: #000000;
+}
+
+.vp-btn--active:hover { background: #e2e8f0; }
+
+/* The only control on this bar with a text label — every other one is an inline SVG, so `.vp-btn`'s
+   0.8rem (12.8px) governs nothing but this. 12.8px is under KB4's 14px body floor, and "CC" is a
+   control label rather than a caption, so the 12px caption band is not the one it is judged against.
+   Found by `e2e/component-sweep.spec.ts`. */
+.vp-cc-btn {
+  font: var(--kbf-type-caption, 400 0.875rem/1.5 system-ui, sans-serif);
+  font-size: 0.875rem;    /* pin: test_video_player_controls.py reads this literal; must stay explicit */
+}
+
+/* The seek slider, and why both of its colours are now literals.
+   The track was `rgba(255, 255, 255, 0.3)` — a translucent white judged against the very backdrop it is
+   painted on, which can never reach 1.4.11's 3:1 at *any* veil alpha over *any* frame: its ceiling is
+   2.71:1, and it sat at 2.46:1 on the black stage with no video loaded. So it failed before a theme or a
+   frame touched it, exactly like the CC indicator above. An **opaque** track is measurable at all, and
+   over a 0.7 veil white is the only value that clears 3:1 against both ends of what the scrim can be
+   (rgb(102) over a white frame, rgb(0) over a black one) — every mid grey vanishes into one or the other.
+   Same conclusion as the CC chip reached: white is the one foreground a video cannot swallow.
+   The fill was `--kbf-color-primary`, 1.38:1 against the scrim on the black stage, so "how far through
+   am I" was undetectable at the default. Painting it on an opaque white track *would* make it a fixed
+   measurable pair — but only in a light theme: `deriveTheme` solves primary against `--kbf-color-bg`, so
+   a dark scheme's primary is light and collapses on a white track, and nothing in `CONTRAST_PAIRS`
+   judges primary-on-white. A `kb4.theme` payload can send one too. So the fill is a literal like every
+   other foreground on this bar: #000 on #fff is 21:1, and the boundary a learner actually reads is
+   frame- and theme-independent. The bar keeps no brand colour, which the CC chip already conceded is
+   the price of a control surface laid over arbitrary video. */
+.vp-progress-wrap {
+  flex: 1;
+  height: 4px;
+  background: #ffffff;
+  border-radius: var(--kbf-radius-full, 50%);
+  cursor: pointer;
+  position: relative;
+  transition: height var(--kbf-duration-quick, 0.15s) var(--kbf-ease-standard, ease);
+}
+
+.vp-progress-wrap:hover { height: 7px; }
+
+/* The seek bar's hit area, 24px tall around the track you see (WCAG 2.5.8, Chris, 2026-10-28). The track
+   itself is unchanged; this strip only widens where a pointer lands. Horizontally it matches the track,
+   so the seek maths, which reads the track's own left edge and width, is unchanged. */
+.vp-progress-wrap::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 24px;
+  transform: translateY(-50%);
+}
+
+/* `outline: none` used to apply here too, leaving a 3px height change — the same cue as hover — as the
+   only sign of keyboard focus (WCAG 2.4.7). It gets `.vp-btn`'s ring instead, offset outwards so a 4px
+   bar is not covered by its own indicator. */
+.vp-progress-wrap:focus-visible {
+  height: 7px;
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.vp-progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: #000000;
+  border-radius: var(--kbf-radius-full, 50%);
+  pointer-events: none;
+}
+
+/* 0.72rem is 11.52px, under KB4's 12px caption floor and well under the 14px body one — and by the same
+   reading applied to the CC label, a clock on a control bar is a control readout rather than a caption,
+   so 14px is the floor it answers to. `aria-hidden` keeps it out of the accessibility tree; it does not
+   excuse a size a sighted learner has to read. Opaque white rather than the old 0.9: a 0.9 white is a
+   grey, and a grey is one more measurement for no gain. */
+.vp-time {
+  font: var(--kbf-type-caption, 400 0.875rem/1.5 system-ui, sans-serif);
+  font-size: 0.875rem;    /* pin: test_video_player_controls.py reads this literal; must stay explicit */
+  font-variant-numeric: tabular-nums;    /* reset after font shorthand */
+  color: #ffffff;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* End card */
+.vp-end-card {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vp-end-card[hidden] { display: none; }
+
+.vp-replay-btn {
+  background-color: var(--kbf-color-primary, #00293C);
+  color: var(--kbf-color-on-primary, #ffffff);
+  border: none;
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+  padding: 0.75rem 2.5rem;
+  font: var(--kbf-type-body-strong, 600 1rem/1.5 system-ui, sans-serif);
+  cursor: pointer;
+  transition: opacity var(--kbf-duration-quick, 0.15s) var(--kbf-ease-standard, ease);
+}
+
+.vp-replay-btn:hover { opacity: 0.88; }
+.vp-replay-btn:focus { outline: 2px solid #ffffff; outline-offset: 2px; }
+
+/* Transcript */
+.vp-transcript-bar { margin-top: 0.75rem; }
+
+
+.vp-transcript {
+  margin-top: 0.5rem;
+  max-height: 13rem;
+  overflow-y: auto;
+  border: 1px solid var(--kbf-color-border, #00293c);
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+  background: var(--kbf-color-surface, #ffffff);
+}
+
+.vp-transcript[hidden] { display: none; }
+
+/* Focusable for keyboard scrolling, so it needs a visible indicator (WCAG 2.4.7). */
+.vp-transcript:focus-visible {
+  outline: 2px solid var(--kbf-color-primary, #00293C);
+  outline-offset: 2px;
+}
+
+.vp-cue-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vp-cue {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--kbf-color-border, #00293c);
+  cursor: pointer;
+  font: var(--kbf-type-body, 400 0.9rem/1.5 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+}
+
+.vp-cue:last-child { border-bottom: none; }
+.vp-cue:hover { background-color: var(--kbf-color-hover-bg, color-mix(in srgb, var(--kbf-color-primary, #00293C) 6%, var(--kbf-color-surface, #ffffff))); color: var(--kbf-color-hover-text, var(--kbf-color-text, #1e293b)); }
+
+.vp-cue--active {
+  /* Into the card, not a literal white, so the playing cue stays readable on a dark palette. */
+  background-color: color-mix(in srgb, var(--kbf-color-primary, #00293C) 12%, var(--kbf-color-surface, #ffffff));
+  font-weight: 600;
+  border-left: 3px solid var(--kbf-color-primary, #00293C);
+}
+
+.vp-cue-time {
+  font: var(--kbf-type-meta, 400 0.75rem/1.5 system-ui, sans-serif);
+  font-variant-numeric: tabular-nums;    /* reset after font shorthand */
+  color: var(--kbf-color-muted, #64748b);
+  flex-shrink: 0;
+  min-width: 3.5rem;
+}

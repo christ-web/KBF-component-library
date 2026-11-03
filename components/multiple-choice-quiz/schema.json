@@ -1,0 +1,97 @@
+{
+  "version": 2,
+  "category": "Quiz & Assessment",
+  "icon": "list-checks",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-bg",
+    "--kbf-color-border",
+    "--kbf-color-correct",
+    "--kbf-color-heading",
+    "--kbf-color-incorrect",
+    "--kbf-color-primary",
+    "--kbf-color-surface",
+    "--kbf-color-text",
+    "--kbf-font-body",
+    "--kbf-font-heading",
+    "--kbf-color-hover-bg",
+    "--kbf-color-hover-text"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    },
+    {
+      "key": "answers",
+      "label": "Answer Choices",
+      "owner": "id",
+      "order": 1
+    }
+  ],
+  "fields": {
+    "question": {
+      "label": "Question",
+      "group": "content",
+      "type": "textarea",
+      "order": 0
+    },
+    "image": {
+      "optional": true,
+      "altField": "image_alt",
+      "label": "Header image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 800,
+        "height": 600,
+        "crop": true,
+        "note": "Shown in a 4:3 frame above the question and cropped to it."
+      },
+      "type": "url",
+      "order": 1
+    },
+    "image_alt": {
+      "label": "Header image alt text",
+      "group": "content",
+      "help": "What the picture shows, in a sentence — anything the learner needs in order to answer must be here. Graphics decides whether a screen reader reads it.",
+      "type": "text",
+      "order": 2
+    },
+    "options": {
+      "mode": "single",
+      "min": 2,
+      "max": 6,
+      "label": "Answer choices",
+      "group": "answers",
+      "itemLabel": "Choice",
+      "help": "Mark the correct one. Which answer is right is never sent to the learner in readable form.",
+      "type": "options",
+      "order": 3
+    },
+    "correct_feedback": {
+      "label": "Correct feedback message",
+      "group": "content",
+      "type": "textarea",
+      "order": 4
+    },
+    "incorrect_feedback": {
+      "label": "Incorrect feedback message",
+      "group": "content",
+      "type": "textarea",
+      "order": 5
+    },
+    "blocking": {
+      "label": "Learner must answer correctly to go on",
+      "group": "content",
+      "default": true,
+      "whenLocked": true,
+      "help": "Off, any answer lets them go on.",
+      "type": "boolean",
+      "order": 6
+    }
+  }
+}

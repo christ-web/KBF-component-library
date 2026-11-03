@@ -1,0 +1,236 @@
+{
+  "version": 2,
+  "category": "Quiz & Assessment",
+  "icon": "chevron-down-square",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-bg",
+    "--kbf-color-border",
+    "--kbf-color-correct",
+    "--kbf-color-heading",
+    "--kbf-color-incorrect",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-color-surface",
+    "--kbf-color-text",
+    "--kbf-font-body",
+    "--kbf-font-heading"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    },
+    {
+      "key": "behavior",
+      "label": "Behavior",
+      "owner": "id",
+      "order": 3
+    }
+  ],
+  "fields": {
+    "title": {
+      "label": "Activity title",
+      "group": "content",
+      "default": "Dropdown Activity",
+      "type": "text",
+      "order": 0
+    },
+    "instructions": {
+      "label": "Instructions",
+      "group": "content",
+      "type": "textarea",
+      "order": 1
+    },
+    "q1_label": {
+      "label": "Question 1",
+      "group": "content",
+      "required": true,
+      "type": "text",
+      "order": 2
+    },
+    "q1_answers": {
+      "label": "Question 1 answer options",
+      "group": "content",
+      "itemLabel": "Option",
+      "min": 2,
+      "max": 6,
+      "answerFlag": {
+        "field": "verdict",
+        "value": "right",
+        "mode": "single"
+      },
+      "help": "Mark exactly one option Correct. Learners see the text; the verdict is never sent to them in readable form.",
+      "fields": {
+        "text": {
+          "label": "Option text",
+          "required": true,
+          "type": "text",
+          "order": 0
+        },
+        "verdict": {
+          "label": "Verdict",
+          "secret": true,
+          "default": "wrong",
+          "options": [
+            {
+              "value": "wrong",
+              "label": "Incorrect"
+            },
+            {
+              "value": "right",
+              "label": "Correct"
+            },
+            {
+              "value": "neutral",
+              "label": "Partially acceptable"
+            }
+          ],
+          "type": "select",
+          "order": 1
+        }
+      },
+      "type": "repeater",
+      "order": 3
+    },
+    "q2_label": {
+      "label": "Question 2 (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 4
+    },
+    "q2_answers": {
+      "label": "Question 2 answer options (optional)",
+      "group": "content",
+      "itemLabel": "Option",
+      "min": 2,
+      "max": 6,
+      "answerFlag": {
+        "field": "verdict",
+        "value": "right",
+        "mode": "single"
+      },
+      "help": "Mark exactly one option Correct. Learners see the text; the verdict is never sent to them in readable form.",
+      "visibleWhen": {
+        "field": "q2_label",
+        "truthy": true
+      },
+      "fields": {
+        "text": {
+          "label": "Option text",
+          "required": true,
+          "type": "text",
+          "order": 0
+        },
+        "verdict": {
+          "label": "Verdict",
+          "secret": true,
+          "default": "wrong",
+          "options": [
+            {
+              "value": "wrong",
+              "label": "Incorrect"
+            },
+            {
+              "value": "right",
+              "label": "Correct"
+            },
+            {
+              "value": "neutral",
+              "label": "Partially acceptable"
+            }
+          ],
+          "type": "select",
+          "order": 1
+        }
+      },
+      "type": "repeater",
+      "order": 5
+    },
+    "q3_label": {
+      "label": "Question 3 (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 6
+    },
+    "q3_answers": {
+      "label": "Question 3 answer options (optional)",
+      "group": "content",
+      "itemLabel": "Option",
+      "min": 2,
+      "max": 6,
+      "answerFlag": {
+        "field": "verdict",
+        "value": "right",
+        "mode": "single"
+      },
+      "help": "Mark exactly one option Correct. Learners see the text; the verdict is never sent to them in readable form.",
+      "visibleWhen": {
+        "field": "q3_label",
+        "truthy": true
+      },
+      "fields": {
+        "text": {
+          "label": "Option text",
+          "required": true,
+          "type": "text",
+          "order": 0
+        },
+        "verdict": {
+          "label": "Verdict",
+          "secret": true,
+          "default": "wrong",
+          "options": [
+            {
+              "value": "wrong",
+              "label": "Incorrect"
+            },
+            {
+              "value": "right",
+              "label": "Correct"
+            },
+            {
+              "value": "neutral",
+              "label": "Partially acceptable"
+            }
+          ],
+          "type": "select",
+          "order": 1
+        }
+      },
+      "type": "repeater",
+      "order": 7
+    },
+    "correct_feedback": {
+      "label": "All-correct feedback",
+      "group": "content",
+      "type": "textarea",
+      "order": 8
+    },
+    "incorrect_feedback": {
+      "label": "Some-wrong feedback",
+      "group": "content",
+      "type": "textarea",
+      "order": 9
+    },
+    "submit_label": {
+      "label": "Submit button label",
+      "group": "behavior",
+      "default": "Submit",
+      "type": "text",
+      "order": 10
+    },
+    "blocking": {
+      "label": "Learner must answer correctly to go on",
+      "group": "behavior",
+      "default": true,
+      "whenLocked": true,
+      "help": "They retry until every answer is right. Off, they may go on after submitting, whatever they chose.",
+      "type": "boolean",
+      "order": 11
+    }
+  }
+}

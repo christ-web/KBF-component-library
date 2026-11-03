@@ -1,0 +1,5 @@
+{
+  "name": "Tabbed Content",
+  "version": "1.1.0",
+  "changes": "Tabs use the shared tab recipe: a 2px black or white edge, idle on the theme's Track instead of a fixed #ececec with pinned text, selected on Surface with a 3px Primary bar, and the keyboard-only Focus Ring (interactive elements phase 4)."
+}

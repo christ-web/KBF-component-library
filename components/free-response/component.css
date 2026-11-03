@@ -1,0 +1,175 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.fr-container {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.fr-title {
+  font: var(--kbf-type-heading-l, 700 1.5rem/1.2 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-heading-l-tracking, normal);
+  text-transform: var(--kbf-type-heading-l-transform, none);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0 0 0.5rem;
+}
+
+.fr-instructions {
+  font: var(--kbf-type-body, 400 1rem/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-body-tracking, normal);
+  text-transform: var(--kbf-type-body-transform, none);
+  color: var(--kbf-color-muted, #64748b);
+  margin: 0 0 1.5rem;
+}
+
+/* The question card and the feedback card are hardcoded — #f7f7f7 and #ffffff — so every foreground
+   on them is pinned too, at the value its `var()` fallback already supplied. A themed colour over a
+   fixed background cannot promise a ratio: under a dark palette --kbf-color-text (#e5e7eb) on the
+   #f7f7f7 card measured 1.15:1. Same fix, and the same reasoning, as `.cs-input-pill` in
+   chat-simulation.
+
+   Unchanged on an unthemed module, byte for byte. Measured: #1e293b on #f7f7f7 13.66:1, on #ffffff
+   14.63:1; #64748b on #ffffff 4.76:1.
+
+   The title, the instructions, the submit button, the feedback panel and its summary are left alone:
+   each paints a themable background of its own, or none at all, so both halves of those pairs move
+   together. */
+
+.fr-question-group {
+  border-left: 0.714rem solid var(--kbf-color-primary, #00293C);
+  background-color: #f7f7f7;
+  box-shadow: var(--kbf-shadow-low, 0 3px 6px rgba(0,0,0,0.16));
+  border-radius: var(--kbf-radius-lg, 12px);
+  margin-bottom: 2.5rem;
+  padding: 1rem;
+}
+
+.fr-question-item { margin-top: 1.4rem; }
+.fr-question-item:first-child { margin-top: 0; }
+
+.fr-question-text {
+  font: var(--kbf-type-body-strong, 600 1.142857rem/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-body-strong-tracking, normal);
+  text-transform: var(--kbf-type-body-strong-transform, none);
+  /* Pinned: the #f7f7f7 question card. See the note above. */
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.fr-answer-label {
+  font: var(--kbf-type-caption, 400 0.875rem/1.45 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-caption-tracking, normal);
+  text-transform: var(--kbf-type-caption-transform, none);
+  display: block;
+  margin-bottom: 0.4rem;
+  /* Pinned: the #f7f7f7 question card. */
+  color: #1e293b;
+}
+
+/* The answer box is the shared field (`kbf-field` in the runtime's CONTROLS_CSS): a 1px outline in Border, Surface and
+   Body Text, and the keyboard focus ring in Focus Ring. Its outline used to be removed, leaving focus as a
+   border colour alone. Its fill and text are both the theme's, so they move together on the fixed card. */
+.fr-textarea {
+  display: block;
+  width: 100%;
+  padding: 0.6em;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.fr-textarea:disabled { cursor: not-allowed; }
+
+.fr-controls {
+  margin-top: 1.5rem;
+  text-align: right;
+}
+
+/* Feedback panel */
+.fr-feedback-panel {
+  background-color: var(--kbf-color-surface, #ffffff);
+  padding: 1.785rem 1rem;
+}
+
+.fr-feedback-group {
+  border-left: 0.714rem solid var(--kbf-color-primary, #00293C);
+  background-color: #f7f7f7;
+  box-shadow: var(--kbf-shadow-low, 0 3px 6px rgba(0,0,0,0.16));
+  border-radius: var(--kbf-radius-lg, 12px);
+  margin-bottom: 2.5rem;
+  padding: 1rem;
+}
+
+.fr-feedback-question-text {
+  font: var(--kbf-type-body-strong, 600 1.142857rem/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-body-strong-tracking, normal);
+  text-transform: var(--kbf-type-body-strong-transform, none);
+  /* Pinned: the #f7f7f7 feedback card. */
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+}
+
+.fr-feedback-cards {
+  display: flex;
+  gap: 0;
+}
+
+.fr-feedback-card {
+  flex: 1;
+  border: 1px dashed #ccc;
+  background-color: #ffffff;
+  padding: 0.714rem;
+}
+
+.fr-feedback-card + .fr-feedback-card {
+  border-left: none;
+}
+
+.fr-feedback-card--suggested {
+  border-left: 4px solid var(--kbf-color-primary, #00293C) !important;
+}
+
+.fr-feedback-card-label {
+  font: var(--kbf-type-eyebrow, 600 0.875rem/1.45 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-eyebrow-tracking, 0.08em);
+  text-transform: var(--kbf-type-eyebrow-transform, uppercase);
+  /* Pinned: the #ffffff card inside it. 4.76:1 — this read the token, which on that fixed card is
+     4.44:1 at defaults, so it was an AA failure before any theme touched it. */
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.fr-feedback-card p {
+  font: var(--kbf-type-body, 400 0.975rem/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-body-tracking, normal);
+  text-transform: var(--kbf-type-body-transform, none);
+  margin: 0;
+  /* Pinned: the #ffffff card. */
+  color: #1e293b;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.fr-feedback-summary {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--kbf-color-border, #00293c);
+}
+
+.fr-feedback-summary-title {
+  font: var(--kbf-type-display-m, 700 2.142857rem/1.2 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-display-m-tracking, normal);
+  text-transform: var(--kbf-type-display-m-transform, none);
+  margin: 0 0 0.5rem;
+  color: var(--kbf-color-heading, #0f172a);
+}
+
+.fr-feedback-summary-desc {
+  font: var(--kbf-type-lead, 600 1rem/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-lead-tracking, normal);
+  text-transform: var(--kbf-type-lead-transform, none);
+  color: var(--kbf-color-muted, #64748b);
+  margin: 0;
+}

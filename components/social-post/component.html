@@ -1,0 +1,32 @@
+<div class="sp-wrapper">
+  <div class="sp-card" role="article" aria-label="Social media post">
+    <div class="sp-header">
+      <div class="sp-avatar" id="sp-avatar" aria-hidden="true">
+        <svg class="sp-avatar-placeholder" width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <circle cx="13" cy="9" r="5" fill="rgba(255,255,255,0.6)"/>
+          <path d="M3 26c0-5.523 4.477-10 10-10s10 4.477 10 10" fill="rgba(255,255,255,0.5)"/>
+        </svg>
+      </div>
+      <div class="sp-identity">
+        <p class="sp-username" id="sp-username"></p>
+        <p class="sp-location" id="sp-location" style="display:none;"></p>
+      </div>
+    </div>
+    <div class="sp-image-wrap" id="sp-image-wrap" style="display:none;">
+      <img class="sp-image" id="sp-image" src="" alt="" />
+    </div>
+    <!-- Like / Comment / Share are a drawing of platform chrome: nothing here is operable, which is
+         why all three were already `aria-hidden`. So the wrapper is hidden too. It used to be a
+         `role="list"` named "Actions" whose every child was hidden — a list announced by name with
+         nothing in it, and three actions promised to a learner who cannot take any of them. -->
+    <ul class="sp-actions" id="sp-actions" aria-hidden="true">
+      <li class="sp-action" id="sp-like"></li>
+      <li class="sp-action" id="sp-comment"></li>
+      <li class="sp-action" id="sp-share"></li>
+    </ul>
+    <div class="sp-body" id="sp-body"></div>
+    <div class="sp-footer" id="sp-footer" style="display:none;">
+      <span class="sp-time" id="sp-time"></span>
+    </div>
+  </div>
+</div>

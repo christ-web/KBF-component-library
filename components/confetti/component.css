@@ -1,0 +1,60 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.cf-wrapper {
+  position: relative;
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+}
+
+.cf-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cf-piece {
+  position: absolute;
+  top: -10%;
+}
+
+.cf-message {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+  max-width: 560px;
+  /* 0.3s delay lets the confetti land first — keep it. */
+  animation: cf-pop-in var(--kbf-duration-gentle, 280ms) var(--kbf-ease-spring, cubic-bezier(0.68, 0, 0.265, 1.55)) 0.3s both;
+}
+
+@keyframes cf-pop-in {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1);   }
+}
+
+.cf-title {
+  font: var(--kbf-type-display-l, 800 1.875rem/1.2 system-ui, sans-serif);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0 0 0.75rem;
+}
+
+.cf-subtitle {
+  font: var(--kbf-type-lead, 400 1.25rem/1.65 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-piece { animation: none !important; opacity: 0; }
+  .cf-message { animation: none; }
+}

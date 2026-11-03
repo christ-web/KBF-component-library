@@ -1,0 +1,94 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.bs-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Step screen ---- */
+.bs-step { width: 100%; max-width: 720px; }
+.bs-step[hidden] { display: none; }
+
+.bs-step-card {
+  background: var(--kbf-color-surface, #ffffff);
+  border-radius: var(--kbf-radius-lg, 12px);
+  box-shadow: var(--kbf-shadow-low, 0 3px 6px rgba(0, 0, 0, 0.16));
+  padding: 2.5rem;
+}
+
+.bs-breadcrumb {
+  font: var(--kbf-type-eyebrow, 600 0.875rem/1.45 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-eyebrow-tracking, 0.08em);
+  text-transform: var(--kbf-type-eyebrow-transform, uppercase);
+  color: var(--kbf-color-muted, #64748b);
+  margin-bottom: 1rem;
+}
+
+.bs-situation {
+  font: var(--kbf-type-body, 400 1.0625rem/1.65 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+  margin-bottom: 1.75rem;
+  white-space: pre-wrap;
+}
+
+/* Choice buttons */
+.bs-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Each choice is the shared answer option (`kbf-option` in the runtime's CONTROLS_CSS): a 2px outline in Border,
+   the hover from the theme and the keyboard-only ring in Focus Ring. A choice moves the scenario on rather
+   than staying selected, so it has no selected state. The letter is its key badge. Lines of a long choice
+   start at the top, beside the badge. */
+.bs-choice { align-items: flex-start; padding: 1rem 1.25rem; }
+
+/* ---- Outcome screen ---- */
+.bs-outcome { width: 100%; max-width: 620px; }
+.bs-outcome[hidden] { display: none; }
+
+.bs-outcome-card {
+  background: var(--kbf-color-surface, #ffffff);
+  border-radius: var(--kbf-radius-lg, 12px);
+  box-shadow: var(--kbf-shadow-low, 0 3px 6px rgba(0, 0, 0, 0.16));
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.bs-outcome-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.bs-outcome-title {
+  font: var(--kbf-type-heading-l, 600 1.5rem/1.3 system-ui, sans-serif);
+  margin: 0 0 0.75rem;
+}
+
+.bs-outcome-title--pass { color: var(--kbf-color-correct, #15803d); }
+.bs-outcome-title--fail { color: var(--kbf-color-incorrect, #dc2626); }
+
+.bs-outcome-message {
+  font: var(--kbf-type-body, 400 1.0625rem/1.65 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+  margin: 0 0 1.5rem;
+  white-space: pre-wrap;
+}
+
+
+/* Animations */
+@keyframes bs-slidein {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bs-step-card { animation: bs-slidein var(--kbf-duration-gentle, 280ms) var(--kbf-ease-entrance, cubic-bezier(0.05, 0.7, 0.1, 1)); }
+.bs-outcome-card { animation: bs-slidein var(--kbf-duration-gentle, 280ms) var(--kbf-ease-entrance, cubic-bezier(0.05, 0.7, 0.1, 1)); }

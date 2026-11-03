@@ -1,0 +1,5 @@
+{
+  "name": "Score Feedback Slide",
+  "version": "1.1.2",
+  "changes": "For the 1024x768 stage (Chris, 2026-10-23): the pass and fail pictures sit whole in a 4:3 space (600x450 recommended); the background slot recommends 2048x1536."
+}

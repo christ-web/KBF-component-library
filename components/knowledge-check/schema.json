@@ -1,0 +1,91 @@
+{
+  "version": 2,
+  "category": "Quiz & Assessment",
+  "icon": "help-circle",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-bg",
+    "--kbf-color-border",
+    "--kbf-color-heading",
+    "--kbf-color-primary",
+    "--kbf-color-surface",
+    "--kbf-color-text",
+    "--kbf-color-track",
+    "--kbf-font-body",
+    "--kbf-color-hover-bg",
+    "--kbf-color-hover-text"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    },
+    {
+      "key": "choices",
+      "label": "Choices",
+      "owner": "id",
+      "order": 1,
+      "help": "Mark every correct choice. Marking more than one turns the question into a multi-select."
+    },
+    {
+      "key": "feedback",
+      "label": "Feedback",
+      "owner": "id",
+      "order": 2
+    }
+  ],
+  "fields": {
+    "question": {
+      "label": "Question",
+      "group": "content",
+      "required": true,
+      "type": "textarea",
+      "order": 0
+    },
+    "choices": {
+      "label": "Choices",
+      "group": "choices",
+      "itemLabel": "Choice",
+      "min": 2,
+      "max": 6,
+      "answerFlag": {
+        "field": "correct",
+        "value": true,
+        "mode": "multi"
+      },
+      "fields": {
+        "text": {
+          "label": "Choice",
+          "required": true,
+          "type": "text",
+          "order": 0
+        },
+        "correct": {
+          "label": "Correct",
+          "secret": true,
+          "default": false,
+          "help": "Never sent to the learner in readable form.",
+          "type": "boolean",
+          "order": 1
+        }
+      },
+      "type": "repeater",
+      "order": 1
+    },
+    "feedback_correct": {
+      "label": "Feedback — Correct",
+      "group": "feedback",
+      "type": "textarea",
+      "order": 2
+    },
+    "feedback_incorrect": {
+      "label": "Feedback — Incorrect",
+      "group": "feedback",
+      "type": "textarea",
+      "order": 3
+    }
+  }
+}

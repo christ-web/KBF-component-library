@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "category": "Slides & Layout",
+  "icon": "book-open",
+  "completion": "auto",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-heading",
+    "--kbf-color-muted",
+    "--kbf-font-body"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "type": {
+      "label": "Type (info / tip / warning / important)",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "headline": {
+      "label": "Headline",
+      "group": "content",
+      "type": "text",
+      "order": 1
+    },
+    "body": {
+      "label": "Body Text",
+      "group": "content",
+      "type": "textarea",
+      "order": 2
+    }
+  }
+}

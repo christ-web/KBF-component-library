@@ -1,0 +1,5 @@
+{
+  "name": "Multiple Choice Quiz",
+  "version": "1.4.0",
+  "changes": "Answer options use the shared recipe: at least 52px, a 2px black or white edge, the theme's hover, selected, right and wrong tints with Body Text kept at 4.5:1, a lettered key badge that fills with the state's colour, and the keyboard-only Focus Ring (interactive elements phase 3)."
+}

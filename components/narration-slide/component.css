@@ -1,0 +1,19 @@
+.kbf-narration {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+}
+.slide-headline {
+  /* displayM role — converted from font-family / font-size: 2rem / font-weight: 700 / line-height: 1.2 */
+  font: var(--kbf-type-display-m, 700 2rem/1.2 system-ui, sans-serif);
+  /* On a look with a heading band (Poster) a title Graphics gave no colour of its own is set in the band's
+     ink; `--kbf-band-ink` is `initial` on every other look, so this falls through to the usual colour. */
+  color: var(--kbf-band-ink, var(--kbf-color-heading, #1e293b));
+  margin: 0 0 1.5rem;
+}
+.slide-body {
+  /* body role — converted from font-size: 1.05rem / line-height: 1.8 */
+  font: var(--kbf-type-body, 400 1rem/1.8 system-ui, sans-serif);
+  color: var(--kbf-color-text, #334155);
+}

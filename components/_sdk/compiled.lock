@@ -1,0 +1,118 @@
+{
+  "accordion": {
+    "settings": "406e2869592e8e97aae4aa2e7a9015feb62b65436d232e58b079c6a27e4180c0",
+    "schema": "ee4f06a9eeb1adc28513cbbd9bb417e9d73a0967fe085602ee9e6697b455343e"
+  },
+  "audio-modal": {
+    "settings": "3f798aa5ed9eb75e7b85d0fd42b8db59b189fa73dcf06e402da2d0e5bb69e648",
+    "schema": "7f147ac6dc2116a296a04877eec2acb8eb3416acd2245cac8b2d626362f524f6"
+  },
+  "audio-player": {
+    "settings": "8d183d17dcfb2a26c652d7a0dbd27268d48978ee0a751572af5d4b7b598dd913",
+    "schema": "74d4f60789b97ba3a6c0290731098d593f72172582ea68fb48fc5d8c97ca0e07"
+  },
+  "blocking-link": {
+    "settings": "3df70344cc2104e56514da0bcda219d051729d22e947bc9124e3d6cc22524bd1",
+    "schema": "6eda9e1c874ea28714b1b399e4c1aecaf7e323846f2660e5cdb5e1f4de221f8f"
+  },
+  "branching-scenario": {
+    "settings": "d5f380e0e7cd38032b33f3101fb58e7261d114b87cd7cd2c3e6179168d2d1221",
+    "schema": "4923f0c2b298e8520ded83895655c8733eb7784788a3875187145ace8ecbf5e7"
+  },
+  "chat-simulation": {
+    "settings": "35b7c26b62e5e812380c0f10ab4b53b648ca14d5a72c4b27f1cb2b0252948f06",
+    "schema": "24c040b45d969164eebdfc80e7ffae2c51ce1b5474c8a5c79d8a5f24d68bcab3"
+  },
+  "confetti": {
+    "settings": "da42aa26e8a15fd7320a7683466513bea963420584c3f2b58d6b7a778bf2ab1a",
+    "schema": "8e0bde584a93df6264d3a256712702e2b728984fbcd9233b49ba99abc3a9b233"
+  },
+  "content-slide": {
+    "settings": "5fab08b05391af7882ad0c73c7d74748d32bd82ec9212b801871eeeda22c27b2",
+    "schema": "585e0a9bb5fa9be9ffe89608ce15956c52261bc487992acbb0209aa3afafc157"
+  },
+  "dropdown-activity": {
+    "settings": "c2127aa797ae0e57cf6b62932bea18b8dc7af01a6de7c28bdb94417fb9cdd3d3",
+    "schema": "15fbb0a17fdb059070c6d4d73dc1f97a0a4bb2bff0e6ea4a0018e78de1d0f321"
+  },
+  "email-deep-dive": {
+    "settings": "1e324c78d2019dba41f0e3a43f543647b0b5bbb57d4adea4bbafb44a9e460024",
+    "schema": "c159cbc8c69c661e5da8433aabe4bb6ff84a4a5af95b24df6e216ced349730ea"
+  },
+  "email-simulation": {
+    "settings": "153a88c12fca8855e2c002438b34a4d90c267e49d0d22852edd7e826851c0b5e",
+    "schema": "354cf0e0cdb28c9bed957b7cb1ebd8ecddeb233b18fc0a234a473747429fbf47"
+  },
+  "final-slide": {
+    "settings": "ea5b478b2cf64f077e3987606c8be7013b6ef02f11278ce02d06ca9676b87a04",
+    "schema": "d1a99899055e9b60f255a7352ff13a176c9fbf1b6d610507060c46931327416d"
+  },
+  "flashcard": {
+    "settings": "c4c951c4e9303586a0a4eb5a3eeb036f5c85b344b25429d021401090dc99167e",
+    "schema": "34d9e4fe2d933be6d65c94bd0998795b5ddd8499220805f9a4415d66cedc2065"
+  },
+  "free-response": {
+    "settings": "8177050550fb0bbcba61bc53e827f327592d7f20ccef44cf8743dbd1238ea1fc",
+    "schema": "beb37cd7f56f469283fffc30ccabd286a3c0ca7e8fe88d8f6ae0160a01e5f5ba"
+  },
+  "heading": {
+    "settings": "bf0f42322a1da3e1d11cc189398c5ecbb807c42ff4b63a8063c2e7311f1e39ed",
+    "schema": "f7fb16c9bc367381c7ac1491fdc18ff6f545f8a1afe3aa79a55e597fa233b901"
+  },
+  "interactive-modals": {
+    "settings": "93c2aa9b19b293e6ce61204cf384020e64f6dde0afdb28b6244c37cc7b9a536e",
+    "schema": "5514cc5294127c8343b190ba0821a7e3378b58f72197090d183b5d43180c5f8b"
+  },
+  "key-takeaway": {
+    "settings": "958be0c2a8e54798613f389b350d37bcf012393eb3ad50f1022a7f28b82af82e",
+    "schema": "1ffa3c0feec2b7ac2c4a1a2806b602d45676c224322d2e30f669fd0607d39c9e"
+  },
+  "knowledge-check": {
+    "settings": "251f6193d122b84d07679274b24e6cca50580af98ca4726411e398d7a86eee24",
+    "schema": "9aa8393f94abe2b29506f1a3efcc5a7d20e0e0f786a3a5d44c05200762f9fc37"
+  },
+  "list": {
+    "settings": "034a451680af3307bae055444d1e91113bc910beac267bbeb731e338709c2b09",
+    "schema": "3f0ef991c37ecb9491a7b1dd0ef0abc67dd3ab6f07ff4f381f7c02325ca1b069"
+  },
+  "multiple-choice-quiz": {
+    "settings": "723a07e03a9e15e925146cc607018e73bcc874a6b7d3aa3d940c8bad3ce2dab5",
+    "schema": "1d7b28b9f2e7151a61acf3d30a615d377b906bdab9f7609c5b141cf9093779b4"
+  },
+  "narration-slide": {
+    "settings": "4f43feef61b9857d65418c4426b96f3ff50b80f9ebf68fc44999bac7da1c0f3b",
+    "schema": "d9e338c59f7becf17ebe7ea51058ad6b80ec469d380398a4a3d48b55232d38b5"
+  },
+  "paragraph": {
+    "settings": "c4c3d1d1a77a96556935bbae29202c3b4c82730e485f5a6499fbb2db9b287d81",
+    "schema": "0cf22e7f9218e132fc892b5451de48ec17e3c34415673dbe06dca55c4c310053"
+  },
+  "quiz-pool": {
+    "settings": "582dfc5266d7ed5579f75d75e5209361f1c7c2b74172ef05120dd86a8765318d",
+    "schema": "c21e0594e4ccac4ea4414f95c6cfc9e8ecab3daa2d55eb3be4409c6f1c633645"
+  },
+  "responsive-image": {
+    "settings": "ad105b7ec9161789aad526f66d9790d0c9928e6374073472dbbd60f88dbfa149",
+    "schema": "e11506f2b56e982bbe02b5091bc929cc97d702e54d598d27598de0afe93477ac"
+  },
+  "score-feedback-slide": {
+    "settings": "ba2b94ebcd0e35307dbe8b9f5a6d1b7f1fcfda125af2de851316b3fb02f40357",
+    "schema": "cb66200b3e798b9f0748fd2460eadea72d003a33df73f2b8eaa538db636c1ec7"
+  },
+  "social-post": {
+    "settings": "295ac266bfaa2f220dbb569983b877243a4d7efc1d04e26eb5fae04704131358",
+    "schema": "fba4b7941044992b04592daab15418caa801a1684e09b76490f6b7f0f5892830"
+  },
+  "tabbed-content": {
+    "settings": "1642b91b1d7cbbada79b36f39398eb05dcaf8f5caa20ea7a1c5eb0097d939204",
+    "schema": "191b0d2bd2e2001addc0d9aa866e34afc7c39c007f1653f60fcbb198798f0f3d"
+  },
+  "title-slide": {
+    "settings": "c2c52346ca7ec86503b640d42907ab5ff94a0814a921cfee485cd4569aa613cd",
+    "schema": "f9b42c9b888287119b77dfc8c261e73198fc2cc36bef971d960d3929e72e18a0"
+  },
+  "video-player": {
+    "settings": "e57f65ade8fb80c767eedb0cfd9a0db7ab3930d8c0d67759631f0242fbc0cf28",
+    "schema": "0f1a5e98150311f6aa46a723b965b9afab2d7806f21466cb5c844adac7a90507"
+  }
+}

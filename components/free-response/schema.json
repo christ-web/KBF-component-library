@@ -1,0 +1,93 @@
+{
+  "version": 2,
+  "category": "Quiz & Assessment",
+  "icon": "pen-line",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-border",
+    "--kbf-color-heading",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-color-surface",
+    "--kbf-color-text",
+    "--kbf-font-body",
+    "--kbf-font-heading"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "title": {
+      "label": "Activity title",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "instructions": {
+      "label": "Instructions for learner",
+      "group": "content",
+      "type": "textarea",
+      "order": 1
+    },
+    "q1": {
+      "label": "Question 1",
+      "group": "content",
+      "type": "textarea",
+      "order": 2
+    },
+    "q1_suggested": {
+      "label": "Suggested answer 1",
+      "group": "content",
+      "type": "textarea",
+      "order": 3
+    },
+    "q2": {
+      "label": "Question 2 (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 4
+    },
+    "q2_suggested": {
+      "label": "Suggested answer 2 (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 5
+    },
+    "q3": {
+      "label": "Question 3 (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 6
+    },
+    "q3_suggested": {
+      "label": "Suggested answer 3 (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 7
+    },
+    "submit_label": {
+      "label": "Submit button label",
+      "group": "content",
+      "type": "text",
+      "order": 8
+    },
+    "feedback_title": {
+      "label": "Feedback panel title",
+      "group": "content",
+      "type": "text",
+      "order": 9
+    },
+    "feedback_description": {
+      "label": "Feedback panel description",
+      "group": "content",
+      "type": "textarea",
+      "order": 10
+    }
+  }
+}

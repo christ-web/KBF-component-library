@@ -1,0 +1,24 @@
+# Every schema.json is compiled from its settings.js. KBF stores schema.json, so a settings.js edited
+# without recompiling would ship settings nobody wrote. Fix it with: node bin/kbf-settings.mjs
+#
+# The other check a pull request into master needs, "KBF / approved", isn't run here: KBF itself posts
+# it on the commit when a library is synced or a component is approved (README, "Setting up the repo").
+name: settings
+
+on:
+  pull_request:
+  push:
+    branches: [master, testing]
+
+permissions:
+  contents: read
+
+jobs:
+  compiled:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node bin/kbf-settings.mjs --check

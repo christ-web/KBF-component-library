@@ -1,0 +1,268 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.ed-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  min-height: 100%;
+}
+
+/* The email card's colours are hardcoded — #faf9f8 outer, #ffffff inner, the #4986e7 avatar — because
+   they are the mail client this mocks, and CLAUDE.md keeps them that way. So every foreground over
+   them is pinned too, at the value its `var()` fallback already supplied: a themed colour over a fixed
+   background cannot promise a ratio, and under a dark palette --kbf-color-text (#e5e7eb) on the white
+   inner card measured 1.23:1 and --kbf-color-muted (#9ca3af) 2.53:1. Same fix, and the same reasoning,
+   as `.cs-input-pill` in chat-simulation.
+
+   Unchanged on an unthemed module, byte for byte. Measured: #0f172a on #faf9f8 16.98:1;
+   #1e293b on #ffffff 14.63:1; #64748b on #ffffff 4.76:1, which clears 4.5:1 with little to spare.
+
+   The theme still reaches everything below the card — the flag list, its badges and the detail panel
+   all paint --kbf-color-surface and take the theme's own foregrounds. What is pinned here is the mock.
+
+   STAGE3-NEEDS: --kbf-type-artifact-* tokens once the artifact domain is emitted by looks.ts.
+   Selectors below marked [artifact] use fixed app-like sizes per ruling 12 (Checkpoint 1, 2026-09-25).
+   The var() names are forward-compatible — they will resolve once the tokens are defined. */
+
+/* ---- Email ---- */
+.ed-email {
+  max-width: 760px;
+  margin: 0 auto 1.5rem;
+}
+
+.ed-outer {
+  background-color: #faf9f8;
+  padding: 0.2rem 1.2rem 1.2rem;
+  outline: 1px solid #d9d8d9;
+}
+
+/* [artifact] headingM — 17px fixed, app-like */
+.ed-subject-bar {
+  padding: 0.6rem 0.5rem;
+  font: var(--kbf-type-artifact-heading-m, 700 17px/1.3 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-heading-m-tracking, normal);
+  text-transform: var(--kbf-type-artifact-heading-m-transform, none);
+  /* Pinned: the #faf9f8 outer. See the note above. */
+  color: #0f172a;
+  border-bottom: 1px solid #e5e5e5;
+  min-height: 1.5rem;
+}
+
+.ed-inner {
+  background: #ffffff;
+  outline: 1px solid #d9d8d9;
+  padding: 0.7rem;
+  margin-top: 0.2rem;
+}
+
+.ed-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+/* The sender's initial. It was #ffffff on this blue at 3.59:1 — under 4.5:1, and 1.1rem bold is
+   17.6px, below the 18.66px at which bold text may drop to 3:1. Black is 5.85:1 on the same blue;
+   Chris ruled on 2026-09-16 that black or white is fine wherever one of them passes, and only one
+   does here. The blue is unchanged, so the mock still reads as the mail client it is imitating.
+
+   [artifact] bodyStrong — circle size governs layout; font fills initials inside it. */
+.ed-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  border-radius: var(--kbf-radius-full, 50%);
+  background-color: #4986e7;
+  color: #000000;
+  font: var(--kbf-type-artifact-body-strong, 600 15px/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-body-strong-tracking, normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.ed-avatar::after {
+  content: '';
+  position: absolute;
+  bottom: -0.15rem;
+  right: -0.15rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: #888;
+  border: 2px solid #fff;
+}
+
+/* [artifact] data — 14px, From/To lines */
+.ed-meta {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.5;
+  font: var(--kbf-type-artifact-data, 400 0.875rem/1.45 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-data-tracking, normal);
+  /* Pinned: the #ffffff inner card. */
+  color: #1e293b;
+}
+
+.ed-meta-row { margin: 0.2rem 0; }
+.ed-meta-label { color: #64748b; }
+
+/* [artifact] data — 14px, toolbar icons */
+.ed-toolbar {
+  margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  align-items: center;
+  opacity: 0.5;
+  font: var(--kbf-type-artifact-data, 400 0.875rem/1.45 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-data-tracking, normal);
+  padding-top: 0.3rem;
+  /* Pinned: the #ffffff inner card, like everything else on it. This one was missed when the rest of
+     the card was pinned, because it sets no colour of its own — it *inherited* --kbf-color-text, so
+     there was no `var(` here to find. Under a dark palette that inherited #e5e7eb, dimmed to 0.5,
+     painted at 1.11:1 on white: the toolbar disappeared.
+
+     Measured as painted, which is the only honest way to measure a dimmed node: #1e293b through this
+     rule's own opacity composites to #8f949d on #ffffff, 3.05:1. Deliberately not taken to 4.5:1 —
+     the 0.5 is the cue that these buttons are dead, 1.4.3 exempts text that is part of an inactive
+     UI component, the subtree is aria-hidden, and nothing the exercise teaches is in these glyphs.
+     3.05:1 clears the 3:1 non-text floor. Unchanged on a module with no theme. */
+  color: #1e293b;
+}
+
+.ed-toolbar-icon { cursor: default; }
+
+/* [artifact] body — 15px, email prose */
+.ed-body {
+  margin: 0.75rem 0.5rem 0.5rem;
+  font: var(--kbf-type-artifact-body, 400 15px/1.7 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-artifact-body-tracking, normal);
+  /* Pinned: the #ffffff inner card. */
+  color: #1e293b;
+  white-space: pre-wrap;
+}
+
+.ed-body a { pointer-events: none; color: inherit; text-decoration: underline; }
+
+/* ---- Flags ---- */
+.ed-flags {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.ed-flags-heading {
+  font: var(--kbf-type-heading-m, 700 1.4rem/1.3 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-heading-m-tracking, normal);
+  text-transform: var(--kbf-type-heading-m-transform, none);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0 0 0.75rem;
+}
+
+.ed-flag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Each flag is the shared answer option (`kbf-option` in the runtime's CONTROLS_CSS): a 2px outline in Border, the
+   hover from the theme and the keyboard-only ring in Focus Ring, and the number as its key badge. A flag
+   opens its panel rather than staying selected; once opened, its arrow gives way to the red-flag or safe
+   badge, so being opened is said by a mark, not by the number's colour (whose muted fill had carried
+   on-primary text it was never measured against). */
+
+.ed-flag-label { flex: 1; font-weight: 500; }
+
+/* Ruling 24: primary used as text → link token. The glyph is aria-hidden; `font-size: 1em`
+   scales it with the choice row. */
+.ed-flag-arrow {
+  font-size: 1em;
+  color: var(--kbf-color-link, var(--kbf-color-primary, #00293C));
+  flex-shrink: 0;
+}
+
+.ed-flag-badge {
+  flex-shrink: 0;
+  display: none;
+}
+
+.ed-flag-item--opened .ed-flag-badge { display: flex; align-items: center; }
+.ed-flag-item--opened .ed-flag-arrow { display: none; }
+
+/* ---- Detail panel ---- */
+/* The shared backdrop (`kbf-scrim`). */
+.ed-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.ed-panel[hidden] { display: none; }
+.ed-panel:focus { outline: none; }
+
+.ed-panel-box {
+  background: var(--kbf-color-surface, #ffffff);
+  border-radius: var(--kbf-radius-lg, 12px);
+  box-shadow: var(--kbf-shadow-high, 0 8px 32px rgba(0,0,0,0.28));
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+  padding: 1.75rem 2rem 2rem;
+}
+
+/* The close is the shared one (`kbf-close`): a 44px square in the box's top corner. */
+
+.ed-panel-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 1rem;
+}
+
+/* The theme's wrong and right tints (`applyOptionTints`), replacing fixed pastels, behind an icon drawn in
+   the state's own colour. */
+.ed-panel-icon--red { background-color: var(--kbf-color-incorrect-bg, var(--kbf-color-surface, #ffffff)); }
+.ed-panel-icon--safe { background-color: var(--kbf-color-correct-bg, var(--kbf-color-surface, #ffffff)); }
+
+.ed-panel-title {
+  font: var(--kbf-type-heading-m, 700 1.4rem/1.3 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-heading-m-tracking, normal);
+  text-transform: var(--kbf-type-heading-m-transform, none);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0 0 0.75rem;
+  /* Clear of the 44px close, 0.5rem in from the corner. */
+  padding-right: 2rem;
+}
+
+.ed-panel-type {
+  font: var(--kbf-type-eyebrow, 600 0.875rem/1.45 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-eyebrow-tracking, 0.08em);
+  text-transform: var(--kbf-type-eyebrow-transform, uppercase);
+  margin: 0 0 0.5rem;
+}
+
+.ed-panel-type--red  { color: var(--kbf-color-incorrect, #dc2626); }
+.ed-panel-type--safe { color: var(--kbf-color-correct, #15803d); }
+
+.ed-panel-text {
+  font: var(--kbf-type-body, 400 1rem/1.7 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-body-tracking, normal);
+  text-transform: var(--kbf-type-body-transform, none);
+  color: var(--kbf-color-text, #1e293b);
+  margin: 0;
+  white-space: pre-wrap;
+}

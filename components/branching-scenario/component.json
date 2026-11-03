@@ -1,0 +1,5 @@
+{
+  "name": "Branching Scenario",
+  "version": "1.2.0",
+  "changes": "Choices use the shared answer-option recipe: at least 52px, a 2px black or white edge, the theme's hover, the lettered key badge and the keyboard-only Focus Ring (interactive elements phase 3)."
+}

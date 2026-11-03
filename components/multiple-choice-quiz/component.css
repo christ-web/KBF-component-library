@@ -1,0 +1,178 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.mcq-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  color: var(--kbf-color-text, #1e293b);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+.mcq-header {
+  background-color: var(--kbf-color-surface, #ffffff);
+  border-radius: var(--kbf-radius-lg, var(--kbf-border-radius, 8px)) var(--kbf-radius-lg, var(--kbf-border-radius, 8px)) 0 0;
+  border: 1px solid var(--kbf-color-border, #00293c);
+  border-bottom: none;
+}
+
+.mcq-question-wrap {
+  padding: 1rem 1rem 0;
+  border-bottom: 1px solid var(--kbf-color-border, #00293c);
+}
+
+.mcq-question {
+  /* headingM role — converted from font-family / font-size: 1.25rem / line-height: 2rem */
+  font: var(--kbf-type-heading-m, 700 1.25rem/1.5 system-ui, sans-serif);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0;
+  padding: 0.5rem 0 1rem;
+  display: block;
+  border: none;
+  background: none;
+}
+
+.mcq-question:focus { outline: none; }
+
+.mcq-image-wrap {
+  background-color: #cccccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+}
+
+/* A 4:3 frame, the stage's shape (Chris, 2026-10-23), filled and cropped as the slot's recommended size
+   says. At most a quarter of the page's height, so on a 1024×768 stage the question, the picture and the
+   choices are on screen together rather than the choices being scrolled to. */
+.mcq-image {
+  width: min(100%, 25vh * 4 / 3);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  height: auto;
+}
+
+.mcq-body {
+  position: relative;
+  flex: 1;
+  background-color: var(--kbf-color-surface, #ffffff);
+  border: 1px solid var(--kbf-color-border, #00293c);
+  border-top: none;
+  border-radius: 0 0 var(--kbf-radius-lg, var(--kbf-border-radius, 8px)) var(--kbf-radius-lg, var(--kbf-border-radius, 8px));
+  min-height: 300px;
+}
+
+.mcq-options { padding: 0.5rem 0; }
+
+.mcq-option {
+  display: block;
+  margin: 2px 0;
+  padding: 0 0.6rem;
+}
+
+/* The answer options are the shared recipe (`kbf-option` in the runtime's CONTROLS_CSS): a 2px outline in Border,
+   the hover, the selected tint and the right and wrong tints, all from the theme. The indicator is its key
+   badge. What is left here is this component's layout. */
+.mcq-option-btn { flex-wrap: nowrap; }
+
+.mcq-option-indicator { overflow: hidden; }
+.mcq-option-indicator svg { width: 1.25rem; height: 1.25rem; }
+
+.mcq-option-label {
+  white-space: normal;
+  word-break: break-word;
+  flex: 1;
+}
+
+.mcq-controls {
+  padding: 1rem 0;
+  margin: 0 1rem;
+  border-top: 1px solid var(--kbf-color-border, #00293c);
+}
+
+.mcq-controls-inner {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mcq-feedback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--kbf-color-surface, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* feedback fade: 0.5s → gentle entrance */
+  animation: mcq-fade-in var(--kbf-duration-gentle, 0.3s) var(--kbf-ease-entrance, ease);
+  border-radius: 0 0 var(--kbf-radius-lg, var(--kbf-border-radius, 8px)) var(--kbf-radius-lg, var(--kbf-border-radius, 8px));
+}
+
+.mcq-feedback[hidden] { display: none; }
+.mcq-feedback:focus { outline: none; }
+
+@keyframes mcq-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mcq-zoom-in {
+  from { transform: scale(0.1); }
+  to   { transform: scale(1);   }
+}
+
+.mcq-feedback-inner {
+  text-align: center;
+  padding: 2rem;
+  /* zoom-in bounce: gentle + spring. Delay dropped per role-map recommendation. */
+  animation: mcq-zoom-in var(--kbf-duration-gentle, 0.3s) var(--kbf-ease-spring, cubic-bezier(0.68, 0, 0.265, 1.55)) both;
+  max-width: 560px;
+  width: 100%;
+}
+
+.mcq-feedback-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.mcq-feedback-icon svg {
+  width: 6rem;
+  height: 6rem;
+}
+
+.mcq-feedback-title {
+  /* displayM role — converted from font-family / font-size: 2.5rem */
+  font: var(--kbf-type-display-m, 700 2.5rem/1.2 system-ui, sans-serif);
+  margin: 0.75rem 0 0.5rem;
+}
+
+/* Right and wrong from the theme (Chris, 2026-10-28). */
+.mcq-feedback-title.mcq-title-correct { color: var(--kbf-color-correct, #15803d); }
+.mcq-feedback-title.mcq-title-incorrect { color: var(--kbf-color-incorrect, #dc2626); }
+
+.mcq-feedback-message {
+  /* feedback role — converted from font-size: 1.25rem */
+  font: var(--kbf-type-feedback, 400 1.25rem/1.5 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+  margin: 0 auto;
+  padding: 0.25rem 0;
+}
+
+.mcq-feedback-controls { margin-top: 1.5rem; }
+
+.mcq-try-again-btn {
+  margin-top: 0.5rem;
+}
+
+.mcq-body.mcq-showing-feedback .mcq-options,
+.mcq-body.mcq-showing-feedback .mcq-controls {
+  visibility: hidden;
+}

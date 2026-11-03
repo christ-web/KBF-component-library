@@ -1,0 +1,55 @@
+/* The preview's own screen. Plain on purpose: the component in the frame is what's being looked at. */
+:root {
+  color-scheme: light;
+  --ink: #001c48; --muted: #3d4f6b; --line: #b8c4d4; --canvas: #eef3f6; --card: #ffffff;
+  --accent: #b33419; --good: #1d6b3a; --bad: #a3271b; --focus: #b33419;
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--canvas);
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+h1 { font-size: 1.15rem; margin: 0; }
+h2 { font-size: 0.95rem; margin: 0 0 0.5rem; }
+h3 { font-size: 0.85rem; margin: 0.75rem 0 0.25rem; }
+code, pre, textarea { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.bar { display: flex; gap: 1rem; align-items: baseline; padding: 0.75rem 1.25rem; background: var(--card); border-bottom: 1px solid var(--line); }
+.hint { color: var(--muted); font-size: 13px; margin: 0.25rem 0 0; }
+.warning { color: var(--bad); font-size: 13px; margin: 0.5rem 0 0; }
+.good { color: var(--good); font-size: 13px; margin: 0.5rem 0 0; }
+
+.layout { display: grid; grid-template-columns: 290px 1fr; gap: 1.25rem; padding: 1.25rem; align-items: start; }
+.controls { display: grid; gap: 1rem; }
+.controls section, .panel { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 0.9rem 1rem; }
+label { display: block; font-size: 13px; margin: 0.4rem 0 0.2rem; }
+label.inline { display: flex; gap: 0.4rem; align-items: center; }
+select, textarea { width: 100%; padding: 0.4rem; border: 1px solid var(--muted); border-radius: 6px; background: #fff; color: var(--ink); }
+fieldset { border: 0; padding: 0; margin: 0.5rem 0 0; display: flex; gap: 1rem; flex-wrap: wrap; }
+legend { font-size: 13px; padding: 0; margin-bottom: 0.2rem; width: 100%; }
+.buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+button { font: inherit; font-size: 13px; padding: 0.45rem 0.9rem; min-height: 36px; border: 1px solid var(--ink); border-radius: 999px; background: var(--card); color: var(--ink); cursor: pointer; }
+button:hover { background: #dfe8ef; }
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.stage-area { min-width: 0; }
+/* An outline, not a border: the frame inside must be exactly the page size KBF shows. */
+.stage { width: 1000px; height: 596px; max-width: 100%; background: #fff; outline: 1px solid var(--line); box-shadow: 0 2px 10px rgb(0 28 72 / 0.12); margin: 0 auto; }
+.stage iframe { width: 100%; height: 100%; border: 0; display: block; }
+.mock-nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; max-width: 1000px; margin: 0.5rem auto 0; font-size: 13px; color: var(--muted); }
+
+.panels { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem; margin-top: 1.25rem; }
+.log { list-style: none; margin: 0 0 0.5rem; padding: 0; max-height: 320px; overflow: auto; font-size: 13px; }
+.log li { border-top: 1px solid var(--line); padding: 0.35rem 0; }
+.log pre { margin: 0.25rem 0 0; white-space: pre-wrap; color: var(--muted); }
+.log-good .log-head { color: var(--good); font-weight: 600; }
+.log-error .log-head { color: var(--bad); font-weight: 600; }
+.log-quiet .log-head { color: var(--muted); }
+#axe-result ul { padding-left: 1.1rem; margin: 0; font-size: 13px; }
+#axe-result a { color: var(--accent); }
+
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: 1fr; }
+  .panels { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,20 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.kbf-txt { margin: 0 0 1rem; }
+/* Text Box Background, from the series' Colors (Chris, 2026-10-21); none unless Graphics sets one. */
+.kbf-txt { background: var(--kbf-color-text-box, transparent); }
+/* 10px either side, so body text sits in from the page's edges (Chris, 2026-10-11). */
+.kbf-txt { padding: 0 10px; }
+/* A background colour gets room around the words, so they never touch its edge — 10px more at the sides. */
+.kbf-txt.kbf-txt-filled { padding: 0.75rem calc(1rem + 10px); border-radius: var(--kbf-border-radius, 8px); }
+
+.kbf-para {
+  margin: 0;
+  font: var(--kbf-type-body, 400 1rem/1.7 system-ui, sans-serif);
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-body-tracking, normal);
+  color: var(--kbf-color-text, #1e293b);
+  /* A line break the ID typed shows as one; runs of spaces still collapse. */
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}

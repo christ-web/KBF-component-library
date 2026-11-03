@@ -1,0 +1,136 @@
+{
+  "version": 2,
+  "category": "Quiz & Assessment",
+  "icon": "list-checks",
+  "completion": "explicit",
+  "scored": true,
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-bg",
+    "--kbf-color-border",
+    "--kbf-color-correct",
+    "--kbf-color-heading",
+    "--kbf-color-incorrect",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-color-surface",
+    "--kbf-color-text",
+    "--kbf-color-track",
+    "--kbf-font-body",
+    "--kbf-font-heading",
+    "--kbf-color-hover-bg",
+    "--kbf-color-hover-text"
+  ],
+  "groups": [
+    {
+      "key": "questions",
+      "label": "Questions",
+      "owner": "id",
+      "order": 0,
+      "help": "Each question needs two options at minimum. Asked in this order, or a random set of them."
+    },
+    {
+      "key": "results",
+      "label": "Results Screen",
+      "owner": "id",
+      "order": 1,
+      "help": "Titles and messages accept {score}, {total} and {pct}."
+    },
+    {
+      "key": "behavior",
+      "label": "Scoring",
+      "owner": "id",
+      "order": 2
+    }
+  ],
+  "fields": {
+    "questions": {
+      "label": "Questions",
+      "group": "questions",
+      "itemLabel": "Question",
+      "min": 1,
+      "max": 20,
+      "fields": {
+        "text": {
+          "label": "Question",
+          "required": true,
+          "rows": 2,
+          "type": "textarea",
+          "order": 0
+        },
+        "options": {
+          "mode": "multi",
+          "min": 2,
+          "max": 6,
+          "label": "Answer options",
+          "itemLabel": "Option",
+          "help": "Mark the correct one, or several for a \"select all that apply\" question. Which answers are right is never sent to the learner in readable form.",
+          "type": "options",
+          "order": 1
+        }
+      },
+      "type": "repeater",
+      "order": 0
+    },
+    "questions_shown": {
+      "label": "Questions shown to each learner",
+      "group": "questions",
+      "min": 1,
+      "max": 20,
+      "help": "A random set is drawn on every attempt. Blank shows every question.",
+      "type": "number",
+      "order": 1
+    },
+    "passing_pct": {
+      "label": "Passing percentage",
+      "group": "results",
+      "default": 80,
+      "min": 0,
+      "max": 100,
+      "unit": "%",
+      "type": "number",
+      "order": 2
+    },
+    "pass_title": {
+      "label": "Pass screen title",
+      "group": "results",
+      "default": "You passed!",
+      "type": "text",
+      "order": 3
+    },
+    "pass_message": {
+      "label": "Pass screen message",
+      "group": "results",
+      "type": "textarea",
+      "order": 4
+    },
+    "fail_title": {
+      "label": "Fail screen title",
+      "group": "results",
+      "default": "Not quite.",
+      "type": "text",
+      "order": 5
+    },
+    "fail_message": {
+      "label": "Fail screen message",
+      "group": "results",
+      "type": "textarea",
+      "order": 6
+    },
+    "blocking": {
+      "label": "Learner must pass to go on",
+      "group": "behavior",
+      "default": true,
+      "whenLocked": true,
+      "help": "Off, they may go on after finishing, whatever the score.",
+      "type": "boolean",
+      "order": 7
+    },
+    "exclude_from_score": {
+      "label": "Non-scoring",
+      "group": "behavior",
+      "type": "boolean",
+      "order": 8
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<div class="ap-wrapper">
+  <div class="ap-layout" id="ap-layout">
+    <div class="ap-stage">
+      <div class="ap-cover" id="ap-cover">
+        <div class="ap-loading" id="ap-loading" aria-label="Loading audio" role="status">
+          <svg class="ap-spin" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <circle cx="18" cy="18" r="14" stroke="rgba(255,255,255,0.3)" stroke-width="4"/>
+            <path d="M18 4a14 14 0 0 1 14 14" stroke="white" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <button class="ap-play-pause" id="ap-play-pause" type="button" aria-label="Play" style="display:none;"></button>
+        <div class="ap-done-badge" id="ap-done-badge" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="12" fill="var(--kbf-color-correct, #15803d)"/>
+            <path d="M7 12l3.5 3.5L17 8" stroke="var(--kbf-color-on-correct, #ffffff)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="ap-controls">
+        <time class="ap-time" id="ap-time" aria-live="off">0:00</time>
+        <div class="ap-progress" id="ap-progress" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+          <div class="ap-progress-bar" id="ap-progress-bar"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ap-transcript-panel" id="ap-transcript-panel" style="display:none;">
+      <h4 class="ap-transcript-heading" id="ap-transcript-heading">Transcript</h4>
+      <!-- The cue list scrolls (max-height: 200px), so it takes focus — cues below the fold were
+           unreachable without a pointer (WCAG 2.1.1). Named via `aria-labelledby` rather than given
+           `role="region"`, which would replace the list semantics a screen reader needs here. -->
+      <ul class="ap-cues" id="ap-cues" aria-live="polite"
+          tabindex="0" aria-labelledby="ap-transcript-heading"></ul>
+    </div>
+  </div>
+</div>

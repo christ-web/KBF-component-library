@@ -1,0 +1,5 @@
+{
+  "name": "Heading",
+  "version": "1.0.1",
+  "changes": "The same 10px inset as Paragraph and List, so a heading aligned left or right no longer sits flush against the edge of the page (Chris, 2026-10-28)."
+}

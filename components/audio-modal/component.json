@@ -1,0 +1,5 @@
+{
+  "name": "Audio Modal",
+  "version": "1.2.0",
+  "changes": "Tiles use the shared tile recipe (2px black or white edge, Surface, the theme's hover), the backdrop is the shared scrim, and the close is a 44px square on Surface in place of a white cross on a translucent wash The transcript's times are Body Text, legible on a dark series (interactive elements phase 4)."
+}

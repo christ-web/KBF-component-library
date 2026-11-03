@@ -1,0 +1,157 @@
+{
+  "version": 2,
+  "category": "Interactives",
+  "icon": "messages-square",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-color-bg",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-color-text",
+    "--kbf-font-body"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "contact_name": {
+      "label": "Contact / sender name",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "avatar_url": {
+      "optional": true,
+      "label": "Contact avatar image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 200,
+        "height": 200,
+        "crop": true,
+        "note": "Shown as a small circle."
+      },
+      "type": "url",
+      "order": 1
+    },
+    "date": {
+      "label": "Date label shown in conversation (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 2
+    },
+    "msg1": {
+      "label": "Message 1 text",
+      "group": "content",
+      "type": "textarea",
+      "order": 3
+    },
+    "msg1_sent": {
+      "label": "Message 1 sent by me",
+      "group": "content",
+      "type": "boolean",
+      "order": 4
+    },
+    "msg1_time": {
+      "label": "Message 1 timestamp (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 5
+    },
+    "msg2": {
+      "label": "Message 2 text (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 6
+    },
+    "msg2_sent": {
+      "label": "Message 2 sent by me",
+      "group": "content",
+      "type": "boolean",
+      "order": 7
+    },
+    "msg2_time": {
+      "label": "Message 2 timestamp (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 8
+    },
+    "msg3": {
+      "label": "Message 3 text (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 9
+    },
+    "msg3_sent": {
+      "label": "Message 3 sent by me",
+      "group": "content",
+      "type": "boolean",
+      "order": 10
+    },
+    "msg3_time": {
+      "label": "Message 3 timestamp (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 11
+    },
+    "msg4": {
+      "label": "Message 4 text (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 12
+    },
+    "msg4_sent": {
+      "label": "Message 4 sent by me",
+      "group": "content",
+      "type": "boolean",
+      "order": 13
+    },
+    "msg4_time": {
+      "label": "Message 4 timestamp (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 14
+    },
+    "msg5": {
+      "label": "Message 5 text (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 15
+    },
+    "msg5_sent": {
+      "label": "Message 5 sent by me",
+      "group": "content",
+      "type": "boolean",
+      "order": 16
+    },
+    "msg5_time": {
+      "label": "Message 5 timestamp (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 17
+    },
+    "msg6": {
+      "label": "Message 6 text (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 18
+    },
+    "msg6_sent": {
+      "label": "Message 6 sent by me",
+      "group": "content",
+      "type": "boolean",
+      "order": 19
+    },
+    "msg6_time": {
+      "label": "Message 6 timestamp (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 20
+    }
+  }
+}

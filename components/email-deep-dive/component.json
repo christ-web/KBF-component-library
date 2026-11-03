@@ -1,0 +1,5 @@
+{
+  "name": "Email Deep Dive",
+  "version": "1.2.0",
+  "changes": "The flag panel's backdrop is the shared scrim, its close is a 44px square with the 2px edge and the keyboard-only Focus Ring, and its icon tints are the theme's right and wrong tints instead of fixed pastels (interactive elements phase 4)."
+}

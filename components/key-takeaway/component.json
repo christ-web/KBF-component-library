@@ -1,0 +1,5 @@
+{
+  "name": "Key Takeaway",
+  "version": "1.0.2",
+  "changes": "Accessibility (WCAG 1.4.3): the reverse of the last fix — a themable foreground painted on a hardcoded background. Both contrast gates measure one palette token against another, so neither can see this either, and a dark palette that passes all nine of those pairs leaves the text below 2.6:1. The four callout faces are hardcoded deliberately — the face is the callout's type, the one cue separating a tip from a warning — so the headline and the body are pinned, and measured against all four, since the type is the author's choice. Measured 1.04:1 and 2.33:1 before; 6.93:1 and 13.44:1 after. Nothing changes on a module with no theme: every pinned value is the fallback that was already resolving."
+}

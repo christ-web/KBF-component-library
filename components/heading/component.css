@@ -1,0 +1,26 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.kbf-txt { margin: 0 0 1rem; }
+/* Text Box Background, from the series' Colors (Chris, 2026-10-21); none unless Graphics sets one. */
+.kbf-txt { background: var(--kbf-color-text-box, transparent); }
+/* A background colour gets room around the words, so they never touch its edge. */
+/* The same inset Paragraph and List have (Chris, 2026-10-28): a heading aligned left or right no longer
+   sits flush against the edge of the page, and the three blocks line up with each other. */
+.kbf-txt { padding: 0 10px; }
+.kbf-txt.kbf-txt-filled { padding: 0.75rem calc(1rem + 10px); border-radius: var(--kbf-border-radius, 8px); }
+
+.kbf-heading {
+  margin: 0;
+  /* On a look with a heading band (Poster) a title Graphics gave no colour of its own is set in the band's
+     ink; `--kbf-band-ink` is `initial` on every other look, so this falls through to the usual colour. */
+  color: var(--kbf-band-ink, var(--kbf-color-heading, #0f172a));
+  overflow-wrap: anywhere;
+}
+/* The look's own type roles, largest first; the three smallest share one and step down by size. */
+.kbf-heading-h1 { font: var(--kbf-type-display-m, 700 2rem/1.2 system-ui, sans-serif); letter-spacing: var(--kbf-type-display-m-tracking, normal); }
+.kbf-heading-h2 { font: var(--kbf-type-heading-l, 700 1.625rem/1.25 system-ui, sans-serif); letter-spacing: var(--kbf-type-heading-l-tracking, normal); }
+.kbf-heading-h3 { font: var(--kbf-type-heading-m, 700 1.375rem/1.3 system-ui, sans-serif); }
+.kbf-heading-h4 { font: var(--kbf-type-body-strong, 700 1rem/1.4 system-ui, sans-serif); font-size: 1.25rem; }
+.kbf-heading-h5 { font: var(--kbf-type-body-strong, 700 1rem/1.4 system-ui, sans-serif); font-size: 1.125rem; }
+.kbf-heading-h6 { font: var(--kbf-type-body-strong, 700 1rem/1.4 system-ui, sans-serif); font-size: 1rem; }
+.kbf-heading { font-family: var(--kbf-font-heading, system-ui, sans-serif); }

@@ -1,0 +1,5 @@
+{
+  "name": "Knowledge Check",
+  "version": "2.3.0",
+  "changes": "Choices use the shared answer-option recipe (at least 52px, a 2px black or white edge, the theme's hover and selected tint, the Focus Ring in place of a fixed blue), and the feedback's fixed green and red pastels are the theme's right and wrong tints with Body Text on them (interactive elements phase 3)."
+}

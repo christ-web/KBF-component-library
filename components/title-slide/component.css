@@ -1,0 +1,90 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.ts-wrapper {
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  /* Title/Final Color from the series' Colors (Chris, 2026-10-21); unset, the page's own background. */
+  background-color: var(--kbf-color-title-bg, var(--kbf-color-bg, #f8fafc));
+  /* The brand gradient, when the series' fill is Gradient (Chris, 2026-10-20); `none` on Solid. A photo or a
+     background colour replaces it from `component.js`. */
+  background-image: var(--kbf-brand-gradient, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+}
+
+.ts-wrapper.ts-align-left  { justify-content: flex-start; }
+.ts-wrapper.ts-align-right { justify-content: flex-end; }
+
+/* ── The scrim ────────────────────────────────────────────────────────────────
+   A veil between an author-supplied background photograph and the title on top of it. Nothing can
+   measure contrast against a photograph — `CONTRAST_PAIRS` measures text against `--kbf-color-bg`,
+   which a `cover` image covers — so the veil is what gives the pair a background KBF chose.
+
+   Black or white and nothing between (Chris's rule of 2026-09-18), and **the direction follows the
+   text**: light text gets the dark veil and dark text the light one. `component.js` decides from
+   Title/Final Heading as painted (Chris, 2026-10-22), so a light pick on a dark look gets the dark veil.
+
+   0.6 either way, which is the smallest alpha that clears every colour this slide paints over the
+   worst photograph — pure white under the dark veil, pure black under the light one.
+   `backend/tests/test_component_scrim.py` is that arithmetic. A background *layer* rather than an
+   overlay element, composed in `component.js` as `var(--ts-scrim, none), url(…)`. */
+.ts-wrapper { --ts-scrim: none; }
+.ts-wrapper.ts-scrim-dark  { --ts-scrim: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)); }
+.ts-wrapper.ts-scrim-light { --ts-scrim: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)); }
+
+/* A subtitle nobody gave a Title/Final Subtitle colour takes the black-or-white endpoint over a veil:
+   `--kbf-color-muted` is #64748b — 1.67:1 on the light veil's worst composite, and no alpha saves a
+   mid-grey, because raising it walks the background *towards* the text. A colour Graphics *picked*
+   stands over the photo too, and the Colors panel measures it there (Chris, 2026-10-22), so
+   `component.js` adds `ts-endpoint` only while the token is unset. */
+.ts-scrim-light .ts-subtitle.ts-endpoint { color: #000000; }
+.ts-scrim-dark .ts-subtitle.ts-endpoint  { color: #ffffff; }
+/* rgba(255,255,255,0.75) composites to 4.06:1 against the dark veil over a white photo. Opaque
+   white is 5.74:1 — the same endpoint rule, reached from the other side. */
+.ts-scrim-dark .ts-subtitle.ts-color-light { color: #ffffff; }
+
+.ts-content {
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+}
+
+.ts-align-left  .ts-content { text-align: left; }
+.ts-align-right .ts-content { text-align: right; }
+
+.ts-title {
+  font: var(--kbf-type-display-xl, 800 3rem/1.15 system-ui, sans-serif);
+  /* Title Font on Series Styles (Chris, 2026-10-21): the Title Slide's and the Final Slide's titles share it.
+     Unset, the title keeps the look's display face, which its type role already carries. */
+  font-family: var(--kbf-font-title, var(--kbf-family-display, system-ui, sans-serif));
+  letter-spacing: var(--kbf-type-display-xl-tracking, 0);
+  /* Title/Final Heading when Graphics picked one (Chris, 2026-10-22), on a heading band too: a picker that
+     visibly does nothing on Poster was the bug. Unpicked, the band's ink on a look with a band
+     (`--kbf-band-ink` is `initial` on every other look), and then Heading Text. */
+  color: var(--kbf-color-title-heading, var(--kbf-band-ink, var(--kbf-color-heading, #0f172a)));
+  margin: 0 0 1rem;
+}
+
+/* "Dark text" chosen explicitly stands on the band too: Graphics' choice, warned about, never changed. */
+.ts-title.ts-color-dark    { color: var(--kbf-color-heading, #0f172a); }
+.ts-title.ts-color-light   { color: #ffffff; }
+/* ruling 24: primary used as text → link token holds contrast across every look */
+.ts-title.ts-color-primary { color: var(--kbf-color-link, var(--kbf-color-primary, #00293C)); }
+
+.ts-subtitle {
+  font: var(--kbf-type-lead, 400 1.25rem/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-lead-tracking, 0);
+  /* Title/Final Subtitle, shared with the Final Slide's; unset, Muted Text. */
+  color: var(--kbf-color-title-muted, var(--kbf-color-muted, #64748b));
+  margin: 0;
+}
+
+.ts-subtitle.ts-color-light   { color: rgba(255, 255, 255, 0.75); }
+/* ruling 24: primary used as text → link token */
+.ts-subtitle.ts-color-primary { color: var(--kbf-color-link, var(--kbf-color-primary, #00293C)); }

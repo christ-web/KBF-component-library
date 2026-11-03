@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "category": "Text",
+  "icon": "pilcrow",
+  "completion": "auto",
+  "styleTokens": [
+    "--kbf-color-text",
+    "--kbf-font-body"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    },
+    {
+      "key": "design",
+      "label": "Design",
+      "owner": "dev",
+      "order": 2
+    }
+  ],
+  "fields": {
+    "text": {
+      "label": "Paragraph text",
+      "group": "content",
+      "required": true,
+      "type": "textarea",
+      "order": 0
+    },
+    "align": {
+      "label": "Alignment",
+      "group": "design",
+      "ga": true,
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centered"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "type": "select",
+      "order": 1
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.kbf-quiz {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  border-radius: var(--kbf-radius-lg, var(--kbf-border-radius, 16px));
+  background: var(--kbf-color-bg, #fff);
+  box-shadow: var(--kbf-shadow-low, 0 2px 20px rgba(0,0,0,0.08));
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+}
+.quiz-question {
+  /* headingM role — converted from font-size: 1.15rem / font-weight: 600 */
+  font: var(--kbf-type-heading-m, 600 1.25rem/1.5 system-ui, sans-serif);
+  color: var(--kbf-color-heading, #1e293b);
+  margin: 0 0 1.5rem;
+}
+.quiz-choices { list-style: none; padding: 0; margin: 0 0 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+/* Each choice is the shared answer option (`kbf-option` in the runtime's CONTROLS_CSS): a 2px outline in Border,
+   the hover and the selected tint from the theme, and the keyboard-only ring in Focus Ring. The letter is
+   its key badge, which fills when the choice is chosen. */
+.quiz-choices .choice-text { flex: 1; }
+.quiz-feedback {
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--kbf-radius-md, 8px);
+  /* feedback role — converted from font-size: 0.95rem */
+  font: var(--kbf-type-feedback, 400 1rem/1.5 system-ui, sans-serif);
+  margin-bottom: 1rem;
+}
+/* Right and wrong from the theme (Chris, 2026-10-28), replacing the fixed pastels: the solved tint
+   (`applyOptionTints`), Body Text on it, and a border in the state's colour. The tick or cross in the
+   message says which in words. */
+.quiz-feedback.correct   { background: var(--kbf-color-correct-bg, var(--kbf-color-surface, #ffffff)); color: var(--kbf-color-text, #1e293b); border: 2px solid var(--kbf-color-correct, #15803d); }
+.quiz-feedback.incorrect { background: var(--kbf-color-incorrect-bg, var(--kbf-color-surface, #ffffff)); color: var(--kbf-color-text, #1e293b); border: 2px solid var(--kbf-color-incorrect, #dc2626); }
+.hidden { display: none; }

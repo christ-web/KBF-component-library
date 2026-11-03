@@ -1,0 +1,53 @@
+<div class="mcq-wrapper">
+  <div class="mcq-header">
+    <div class="mcq-question-wrap">
+      <h2 class="mcq-question" id="mcq-question" tabindex="-1"></h2>
+    </div>
+    <div class="mcq-image-wrap" id="mcq-image-wrap">
+      <img class="mcq-image" id="mcq-image" src="" alt="" />
+    </div>
+  </div>
+
+  <div class="mcq-body" id="mcq-body">
+    <div
+      class="mcq-options"
+      id="mcq-options"
+      role="radiogroup"
+      aria-labelledby="mcq-question"
+    >
+      <!-- Options A–D injected by JS -->
+    </div>
+
+    <div class="mcq-controls">
+      <div class="mcq-controls-inner">
+        <button
+          class="mcq-submit-btn kbf-btn"
+          id="mcq-submit"
+          type="button"
+          disabled
+          aria-disabled="true"
+        >Submit</button>
+      </div>
+    </div>
+
+    <div
+      class="mcq-feedback"
+      id="mcq-feedback"
+      hidden
+      role="alert"
+      tabindex="-1"
+      aria-live="assertive"
+    >
+      <div class="mcq-feedback-inner">
+        <div class="mcq-feedback-icon" id="mcq-feedback-icon" aria-hidden="true"></div>
+        <h2 class="mcq-feedback-title" id="mcq-feedback-title"></h2>
+        <p class="mcq-feedback-message" id="mcq-feedback-message"></p>
+        <div class="mcq-feedback-controls" id="mcq-feedback-controls">
+          <button class="mcq-try-again-btn kbf-btn kbf-btn--secondary" id="mcq-try-again" type="button">
+            Try Again
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="fr-container">
+  <div class="fr-stage" id="fr-stage">
+    <div class="fr-header">
+      <h2 class="fr-title" id="fr-title"></h2>
+      <p class="fr-instructions" id="fr-instructions"></p>
+    </div>
+    <div class="fr-questions" id="fr-questions">
+      <!-- Question group cards injected by JS -->
+    </div>
+    <div class="fr-controls">
+      <button class="fr-submit-btn kbf-btn" id="fr-submit-btn" type="button">Submit</button>
+    </div>
+  </div>
+  <!-- `tabindex="-1"` so submitting can move focus here. Submitting hides `#fr-stage`, which
+       contains the submit button the learner just pressed, so focus was being destroyed: it fell
+       back to the document and a keyboard-only learner had to tab in from the top of the frame with
+       no indication that anything had happened (WCAG 2.4.3, 4.1.3). Not a tab stop — -1, reached
+       only programmatically. -->
+  <div class="fr-feedback-panel" id="fr-feedback-panel" role="group" tabindex="-1" style="display:none;">
+    <!-- Feedback content injected by JS on submit -->
+  </div>
+</div>

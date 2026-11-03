@@ -1,0 +1,5 @@
+{
+  "name": "Dropdown Activity",
+  "version": "1.3.0",
+  "changes": "Answered rows and the feedback take the theme's right and wrong colours and tints, replacing the fixed pastels and the light-page text pinned on them, so a dark series is legible. The dropdowns use the shared field: a 2px black or white edge, at least 44px, and the keyboard-only Focus Ring (interactive elements phase 3)."
+}

@@ -1,0 +1,110 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.sf-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  background-size: cover;
+  background-position: center;
+}
+
+/* ── The scrim ────────────────────────────────────────────────────────────────
+   A veil between an author-supplied background photograph and the result on it. Nothing can measure
+   contrast against a photograph, so the veil is what gives the pair a background KBF chose.
+
+   **0.85, not the 0.6 the other three slides use, and the alpha is calculated rather than picked.**
+   This slide's title is `--kbf-color-correct` #15803d or `--kbf-color-incorrect` #dc2626 — both
+   *mid*-luminance, so they fail against anything near them and a lighter veil walks the background
+   towards the text rather than away from it. Over the worst case, a black photograph: 0.6 gives the
+   green 1.76:1 and the red 1.70:1, under even the 3:1 large-text floor the title qualifies for.
+   0.85 gives 3.54:1 and 3.41:1. `backend/tests/test_component_scrim.py` is that arithmetic.
+
+   The alternative was the black-or-white endpoint rule, which would have made both titles the same
+   colour — and a pass and a fail reading identically is a worse outcome than a washed-out backdrop
+   on the one slide whose background is decoration behind a result. White rather than black because
+   every other colour here is a dark theme token.
+
+   A background *layer*, composed in `component.js` as `var(--sf-scrim, none), url(…)`. */
+.sf-wrapper { --sf-scrim: none; }
+.sf-wrapper.sf-scrim { --sf-scrim: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)); }
+
+.sf-card {
+  text-align: center;
+  padding: 4rem 3rem;
+  width: 100%;
+  max-width: 700px;
+}
+
+/* A 4:3 space (Chris, 2026-10-23), the picture shown whole inside it: a pass or fail picture is usually an
+   illustration, often on a transparent ground, and cropping one would cut it. */
+.sf-image {
+  min-width: 200px;
+  max-width: 15vw;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  display: block;
+}
+
+.sf-title {
+  font: var(--kbf-type-display-xl, 800 clamp(2rem, 5vw, 4rem)/1.1 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-display-xl-tracking, 0);
+  margin: 0 0 0.75rem;
+}
+
+/* On the heading band (Poster) the result is set in the band's ink, because green or red on the band's colour
+   is not a pair anyone measured; the words say pass or fail either way. */
+.sf-title--pass { color: var(--kbf-band-ink, var(--kbf-color-correct, #15803d)); }
+.sf-title--fail { color: var(--kbf-band-ink, var(--kbf-color-incorrect, #dc2626)); }
+/* No result to report — no quiz answered yet in this attempt. The heading token rather than a third
+   result colour, because there is no result: green or red here would name an outcome the learner has
+   not reached, and a fourth hue invented for "neither" is a colour nobody can read a meaning off. */
+.sf-title--pending { color: var(--kbf-band-ink, var(--kbf-color-heading, #0f172a)); }
+
+.sf-subtitle {
+  font: var(--kbf-type-heading-l, 600 clamp(1.2rem, 3vw, 2rem)/1.2 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-heading-l-tracking, 0);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0 0 1rem;
+}
+
+.sf-message {
+  font: var(--kbf-type-body, 400 1.1rem/1.7 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* Pass image entrance animation */
+.sf-card--pass .sf-image {
+  animation: sf-popin var(--kbf-duration-gentle, 0.5s) var(--kbf-ease-spring, cubic-bezier(0.68, 0, 0.265, 1.55)) forwards;
+}
+
+/* Fail image shake animation */
+.sf-card--fail .sf-image {
+  animation:
+    sf-appear var(--kbf-duration-gentle, 0.5s) var(--kbf-ease-entrance, ease-out),
+    sf-shake var(--kbf-duration-base, 0.25s) var(--kbf-duration-gentle, 0.5s) var(--kbf-ease-standard, ease-in-out);
+}
+
+@keyframes sf-popin {
+  0%   { opacity: 0; transform: scale(0.4) rotate(-20deg); }
+  60%  { transform: scale(1.2) rotate(10deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes sf-appear {
+  0%   { opacity: 0; transform: scale(0.4) rotate(-20deg); }
+  100% { opacity: 1; }
+}
+
+@keyframes sf-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(18px); }
+  60%       { transform: translateX(-18px); }
+}

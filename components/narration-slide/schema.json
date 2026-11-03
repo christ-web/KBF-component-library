@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "category": "Slides & Layout",
+  "icon": "book-open",
+  "completion": "auto",
+  "styleTokens": [
+    "--kbf-color-heading",
+    "--kbf-color-text",
+    "--kbf-font-body",
+    "--kbf-font-heading"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "headline": {
+      "label": "Slide Headline",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "on_screen_text": {
+      "label": "On-Screen Text",
+      "group": "content",
+      "type": "text",
+      "order": 1
+    },
+    "author_notes": {
+      "label": "Author Notes (internal)",
+      "group": "content",
+      "type": "textarea",
+      "order": 2
+    }
+  }
+}

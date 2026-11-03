@@ -1,0 +1,5 @@
+{
+  "name": "Accordion",
+  "version": "2.2.0",
+  "changes": "Headers use the shared disclosure recipe: at least 44px, a 2px black or white edge, the theme's hover and the keyboard-only Focus Ring (interactive elements phase 4)."
+}

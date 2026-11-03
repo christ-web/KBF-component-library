@@ -1,0 +1,301 @@
+{
+  "version": 2,
+  "category": "Interactives",
+  "icon": "shuffle",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-bg",
+    "--kbf-color-border",
+    "--kbf-color-correct",
+    "--kbf-color-incorrect",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-color-surface",
+    "--kbf-color-text",
+    "--kbf-color-track",
+    "--kbf-font-body",
+    "--kbf-font-heading",
+    "--kbf-color-hover-bg",
+    "--kbf-color-hover-text"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "step1_situation": {
+      "label": "Step 1 — situation description",
+      "group": "content",
+      "type": "textarea",
+      "order": 0
+    },
+    "step1_choice_a": {
+      "label": "Step 1 Choice A text",
+      "group": "content",
+      "type": "text",
+      "order": 1
+    },
+    "step1_choice_b": {
+      "label": "Step 1 Choice B text",
+      "group": "content",
+      "type": "text",
+      "order": 2
+    },
+    "step1_choice_c": {
+      "label": "Step 1 Choice C text (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 3
+    },
+    "step1_a_next": {
+      "label": "Step 1 Choice A leads to",
+      "group": "content",
+      "options": [
+        {
+          "value": "step2",
+          "label": "Go to step 2"
+        },
+        {
+          "value": "step3",
+          "label": "Go to step 3"
+        },
+        {
+          "value": "pass",
+          "label": "End on the pass outcome"
+        },
+        {
+          "value": "fail",
+          "label": "End on the fail outcome"
+        }
+      ],
+      "type": "select",
+      "order": 4
+    },
+    "step1_b_next": {
+      "label": "Step 1 Choice B leads to",
+      "group": "content",
+      "options": [
+        {
+          "value": "step2",
+          "label": "Go to step 2"
+        },
+        {
+          "value": "step3",
+          "label": "Go to step 3"
+        },
+        {
+          "value": "pass",
+          "label": "End on the pass outcome"
+        },
+        {
+          "value": "fail",
+          "label": "End on the fail outcome"
+        }
+      ],
+      "type": "select",
+      "order": 5
+    },
+    "step1_c_next": {
+      "label": "Step 1 Choice C leads to (optional)",
+      "group": "content",
+      "options": [
+        {
+          "value": "step2",
+          "label": "Go to step 2"
+        },
+        {
+          "value": "step3",
+          "label": "Go to step 3"
+        },
+        {
+          "value": "pass",
+          "label": "End on the pass outcome"
+        },
+        {
+          "value": "fail",
+          "label": "End on the fail outcome"
+        }
+      ],
+      "type": "select",
+      "order": 6
+    },
+    "step2_situation": {
+      "label": "Step 2 — situation description (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 7
+    },
+    "step2_choice_a": {
+      "label": "Step 2 Choice A (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 8
+    },
+    "step2_choice_b": {
+      "label": "Step 2 Choice B (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 9
+    },
+    "step2_choice_c": {
+      "label": "Step 2 Choice C (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 10
+    },
+    "step2_a_next": {
+      "label": "Step 2 A leads to",
+      "group": "content",
+      "options": [
+        {
+          "value": "step3",
+          "label": "Go to step 3"
+        },
+        {
+          "value": "pass",
+          "label": "End on the pass outcome"
+        },
+        {
+          "value": "fail",
+          "label": "End on the fail outcome"
+        }
+      ],
+      "type": "select",
+      "order": 11
+    },
+    "step2_b_next": {
+      "label": "Step 2 B leads to",
+      "group": "content",
+      "options": [
+        {
+          "value": "step3",
+          "label": "Go to step 3"
+        },
+        {
+          "value": "pass",
+          "label": "End on the pass outcome"
+        },
+        {
+          "value": "fail",
+          "label": "End on the fail outcome"
+        }
+      ],
+      "type": "select",
+      "order": 12
+    },
+    "step2_c_next": {
+      "label": "Step 2 C leads to (optional)",
+      "group": "content",
+      "options": [
+        {
+          "value": "step3",
+          "label": "Go to step 3"
+        },
+        {
+          "value": "pass",
+          "label": "End on the pass outcome"
+        },
+        {
+          "value": "fail",
+          "label": "End on the fail outcome"
+        }
+      ],
+      "type": "select",
+      "order": 13
+    },
+    "step3_situation": {
+      "label": "Step 3 — situation description (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 14
+    },
+    "step3_choice_a": {
+      "label": "Step 3 Choice A (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 15
+    },
+    "step3_choice_b": {
+      "label": "Step 3 Choice B (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 16
+    },
+    "step3_a_next": {
+      "label": "Step 3 A leads to",
+      "group": "content",
+      "options": [
+        {
+          "value": "pass",
+          "label": "End on the pass outcome"
+        },
+        {
+          "value": "fail",
+          "label": "End on the fail outcome"
+        }
+      ],
+      "type": "select",
+      "order": 17
+    },
+    "step3_b_next": {
+      "label": "Step 3 B leads to",
+      "group": "content",
+      "options": [
+        {
+          "value": "pass",
+          "label": "End on the pass outcome"
+        },
+        {
+          "value": "fail",
+          "label": "End on the fail outcome"
+        }
+      ],
+      "type": "select",
+      "order": 18
+    },
+    "pass_title": {
+      "label": "Pass outcome title",
+      "group": "content",
+      "type": "text",
+      "order": 19
+    },
+    "pass_message": {
+      "label": "Pass outcome message",
+      "group": "content",
+      "type": "textarea",
+      "order": 20
+    },
+    "fail_title": {
+      "label": "Fail outcome title",
+      "group": "content",
+      "type": "text",
+      "order": 21
+    },
+    "fail_message": {
+      "label": "Fail outcome message",
+      "group": "content",
+      "type": "textarea",
+      "order": 22
+    },
+    "retry_label": {
+      "label": "Retry button label (optional, default: Try Again)",
+      "group": "content",
+      "type": "text",
+      "order": 23
+    },
+    "blocking": {
+      "label": "Learner must reach a passing ending to go on",
+      "group": "content",
+      "default": true,
+      "whenLocked": true,
+      "help": "Off, any ending lets them go on.",
+      "type": "boolean",
+      "order": 24
+    }
+  }
+}

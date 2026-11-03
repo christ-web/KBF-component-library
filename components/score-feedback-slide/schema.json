@@ -1,0 +1,132 @@
+{
+  "version": 2,
+  "category": "Quiz & Assessment",
+  "icon": "trophy",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-color-bg",
+    "--kbf-color-correct",
+    "--kbf-color-heading",
+    "--kbf-color-incorrect",
+    "--kbf-color-text",
+    "--kbf-font-body",
+    "--kbf-font-heading"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    },
+    {
+      "key": "design",
+      "label": "Design",
+      "owner": "dev",
+      "order": 2
+    }
+  ],
+  "fields": {
+    "pass_title": {
+      "label": "Pass title (supports {score}, {total}, {pct})",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "pass_subtitle": {
+      "label": "Pass subtitle (optional, same tokens)",
+      "group": "content",
+      "type": "text",
+      "order": 1
+    },
+    "pass_message": {
+      "label": "Pass body message (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 2
+    },
+    "pass_image": {
+      "optional": true,
+      "altField": "pass_image_alt",
+      "label": "Pass image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 600,
+        "height": 450,
+        "note": "Shown whole in a 4:3 space; a picture on a transparent ground suits it."
+      },
+      "type": "url",
+      "order": 3
+    },
+    "pass_image_alt": {
+      "label": "Pass image alt text",
+      "group": "content",
+      "help": "What the picture shows, in a sentence. Graphics decides whether a screen reader reads it.",
+      "type": "text",
+      "order": 4
+    },
+    "fail_title": {
+      "label": "Fail title (supports {score}, {total}, {pct})",
+      "group": "content",
+      "type": "text",
+      "order": 5
+    },
+    "fail_subtitle": {
+      "label": "Fail subtitle (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 6
+    },
+    "fail_message": {
+      "label": "Fail body message (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 7
+    },
+    "fail_image": {
+      "optional": true,
+      "altField": "fail_image_alt",
+      "label": "Fail image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 600,
+        "height": 450,
+        "note": "Shown whole in a 4:3 space; a picture on a transparent ground suits it."
+      },
+      "type": "url",
+      "order": 8
+    },
+    "fail_image_alt": {
+      "label": "Fail image alt text",
+      "group": "content",
+      "help": "What the picture shows, in a sentence. Graphics decides whether a screen reader reads it.",
+      "type": "text",
+      "order": 9
+    },
+    "background_image": {
+      "optional": true,
+      "label": "Background image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 2048,
+        "height": 1536,
+        "crop": true,
+        "note": "Cropped to fill the page, so keep the subject near the center."
+      },
+      "type": "url",
+      "order": 10
+    },
+    "scrim": {
+      "label": "Fade the background image behind the result",
+      "group": "design",
+      "ga": true,
+      "default": true,
+      "help": "Keeps the score and message readable over a photo. Ignored when no background image is set.",
+      "type": "boolean",
+      "order": 11
+    }
+  }
+}

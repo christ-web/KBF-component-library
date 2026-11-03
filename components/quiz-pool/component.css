@@ -1,0 +1,203 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.qp-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---- Progress bar ---- */
+.qp-progress {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+.qp-progress-text {
+  /* caption role — converted from font-size: 0.85rem. The 14px floor is enforced by the token
+     (eyebrow and caption are both raised to 0.875rem per rulings 6 and 11). font-weight: 600
+     is kept explicitly after the role, as the role map specifies. */
+  font: var(--kbf-type-caption, 400 0.875rem/1.5 system-ui, sans-serif);
+  font-weight: 600;
+  color: var(--kbf-color-muted, #64748b);
+  font-variant-numeric: tabular-nums;
+}
+
+.qp-dots {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.qp-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: var(--kbf-radius-full, 50%);
+  /* The unanswered state of a progress dot. Its answered states are `--kbf-color-primary`,
+     `--kbf-color-correct` and `--kbf-color-incorrect`; on `--kbf-color-border` this became
+     identical to primary once that went navy, so the dots stopped indicating anything. */
+  background-color: var(--kbf-color-track, #e2e8f0);
+  transition: background-color var(--kbf-duration-base, 0.2s) var(--kbf-ease-standard, ease);
+}
+
+.qp-dot--active  { background-color: var(--kbf-color-primary, #00293C); }
+.qp-dot--correct { background-color: var(--kbf-color-correct, #15803d); }
+.qp-dot--wrong   { background-color: var(--kbf-color-incorrect, #dc2626); }
+
+/* ---- Quiz card ---- */
+.qp-card {
+  width: 100%;
+  max-width: 700px;
+  background: var(--kbf-color-surface, #ffffff);
+  border-radius: var(--kbf-radius-lg, var(--kbf-border-radius, 8px));
+  box-shadow: var(--kbf-shadow-low, 0 2px 12px rgba(0, 0, 0, 0.08));
+  padding: 2.5rem;
+  position: relative;
+  min-height: 320px;
+}
+
+.qp-question {
+  /* headingM role — converted from font-family / font-size: 1.2rem / font-weight: 700 */
+  font: var(--kbf-type-heading-m, 700 1.25rem/1.5 system-ui, sans-serif);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0 0 1.5rem;
+}
+
+/* Options */
+.qp-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+/* The question takes focus as it loads, so a screen reader reads it (Chris, 2026-10-28). It had no ring of
+   its own and showed the browser's blue; it takes the module's primary colour, like the quiz's buttons. */
+.qp-question:focus { outline: 2px solid var(--kbf-color-primary, #00293C); outline-offset: 4px; border-radius: 4px; }
+/* Each option is the shared answer option (`kbf-option` in the runtime's CONTROLS_CSS): a 2px outline in Border,
+   the hover and the selected tint from the theme, the keyboard-only ring in Focus Ring, and the letter as
+   its key badge, which fills with the selection colour when chosen. */
+/* "Select all that apply" (2.3.0): said in words, and the badges go square, the shape a checkbox is,
+   so the difference from a single-answer question is not carried by colour (`kbf-options--multi`). */
+.qp-instructions {
+  font: var(--kbf-type-body, 400 1rem/1.5 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+  margin: -1rem 0 1rem;
+}
+
+/* Submit */
+.qp-controls { display: flex; justify-content: flex-end; }
+
+/* Feedback overlay */
+.qp-feedback {
+  position: absolute;
+  inset: 0;
+  background: var(--kbf-color-surface, #ffffff);
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.qp-feedback[hidden] { display: none; }
+
+.qp-feedback-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 480px;
+}
+
+.qp-feedback-icon { display: flex; }
+
+.qp-feedback-text {
+  /* feedback role — converted from font-size: 1rem */
+  font: var(--kbf-type-feedback, 400 1rem/1.5 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+}
+
+.qp-next-btn {
+  margin-top: 0.5rem;
+}
+
+/* ---- Results screen ---- */
+.qp-results {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qp-results[hidden] { display: none; }
+.qp-quiz[hidden] { display: none; }
+
+.qp-results-card {
+  background: var(--kbf-color-surface, #ffffff);
+  border-radius: var(--kbf-radius-lg, var(--kbf-border-radius, 8px));
+  box-shadow: var(--kbf-shadow-low, 0 2px 12px rgba(0, 0, 0, 0.08));
+  padding: 3rem 2.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.qp-results-icon { margin: 0 0 1rem; display: flex; justify-content: center; }
+
+.qp-results-title {
+  /* displayM role — converted from font-family / font-size: 2rem / font-weight: 700 */
+  font: var(--kbf-type-display-m, 700 2rem/1.2 system-ui, sans-serif);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0 0 0.75rem;
+}
+
+/* Right and wrong from the theme (Chris, 2026-10-28). */
+.qp-results-title--pass { color: var(--kbf-color-correct, #15803d); }
+.qp-results-title--fail { color: var(--kbf-color-incorrect, #dc2626); }
+
+.qp-results-message {
+  /* body role — converted from font-size: 1rem */
+  font: var(--kbf-type-body, 400 1rem/1.6 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+  margin: 0 0 1.5rem;
+  white-space: pre-wrap;
+}
+
+.qp-retry-btn[hidden] { display: none; }
+
+/* ---- Animations ---- */
+@keyframes qp-popin {
+  0%   { opacity: 0; transform: scale(0.6) rotate(-15deg); }
+  60%  { transform: scale(1.15) rotate(10deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes qp-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(12px); }
+  60%       { transform: translateX(-12px); }
+}
+
+/* The glyph pops, never its row. `.qp-results-icon` is a card-wide flex box, and a card-wide box tilted
+   10° sweeps its corners across the title below it for half a second: nothing a learner sees, but axe
+   scanning in that window finds the title covered and cannot decide its contrast. The 56px glyph at
+   1.15× and 10° reaches about 9px past its own edge, inside the row's 1rem bottom margin. */
+.qp-results-card--pass .qp-results-icon svg {
+  /* pass pop-in: 0.5s → gentle + spring */
+  animation: qp-popin var(--kbf-duration-gentle, 0.3s) var(--kbf-ease-spring, cubic-bezier(0.68, 0, 0.265, 1.55)) forwards;
+}
+.qp-results-card--fail .qp-results-icon {
+  /* fail shake: 0.4s → slow standard (reduced motion removes it at shell level) */
+  animation: qp-shake var(--kbf-duration-slow, 0.4s) 0.3s var(--kbf-ease-standard, ease);
+}

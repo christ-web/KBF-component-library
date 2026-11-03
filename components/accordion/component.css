@@ -1,0 +1,84 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.acc-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  min-height: 100%;
+}
+
+.acc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.acc-item { position: relative; }
+
+/* Each header is the shared disclosure (`kbf-disclosure` in the runtime's CONTROLS_CSS): no border,
+   Surface and Body Text, the series' hover and the keyboard-only Focus Ring. What is left is its type,
+   its padding and the lift that sets it above the panel it opens. */
+.acc-header {
+  box-shadow: var(--kbf-shadow-low, 0 3px 6px rgba(0, 0, 0, 0.16));
+  padding: 1rem;
+  /* No gap: the opened tick keeps its own margin, as before the recipe. */
+  gap: 0;
+  font: var(--kbf-type-body-strong, 600 1.0625rem/1.65 system-ui, sans-serif);
+  position: relative;
+  z-index: 1;
+}
+
+.acc-title { flex: 1; }
+
+.acc-check {
+  font-size: 1em;
+  color: var(--kbf-color-correct, #15803d);
+  margin-right: 0.5rem;
+  opacity: 0;
+  transition: opacity var(--kbf-duration-base, 200ms);
+}
+
+.acc-item.acc-opened .acc-check { opacity: 1; }
+
+.acc-chevron {
+  flex-shrink: 0;
+  transition: transform var(--kbf-duration-quick, 90ms) var(--kbf-ease-standard, cubic-bezier(0.2, 0, 0, 1));
+  color: var(--kbf-color-muted, #64748b);
+}
+
+.acc-item.acc-open .acc-chevron {
+  transform: rotate(180deg);
+}
+
+/* Close transition — quick + exit; applied when the item is NOT open */
+.acc-item:not(.acc-open) .acc-content-wrap {
+  transition: max-height var(--kbf-duration-quick, 90ms) var(--kbf-ease-exit, cubic-bezier(0.3, 0, 0.8, 0.15));
+}
+
+.acc-content-wrap {
+  overflow: hidden;
+  max-height: 0;
+  /* Open transition — gentle + entrance; overridden above for the close direction */
+  transition: max-height var(--kbf-duration-gentle, 280ms) var(--kbf-ease-entrance, cubic-bezier(0.05, 0.7, 0.1, 1));
+  margin-bottom: 0.25rem;
+}
+
+.acc-item.acc-open .acc-content-wrap {
+  max-height: 600px;
+}
+
+.acc-content {
+  background-color: var(--kbf-color-surface, #ffffff);
+  padding: 2rem 1.75rem;
+  border-radius: 0 0 var(--kbf-radius-md, 8px) var(--kbf-radius-md, 8px);
+  font: var(--kbf-type-body, 400 1.0625rem/1.65 system-ui, sans-serif);
+  color: var(--kbf-color-text, #1e293b);
+  white-space: pre-wrap;
+}
+
+/* SVG chevron */
+.acc-chevron-svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: block;
+}

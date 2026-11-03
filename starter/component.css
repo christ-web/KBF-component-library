@@ -1,0 +1,66 @@
+/*
+  Styling for the Reveal Card. It applies only inside this component's shadow root.
+
+  Colours, fonts and corners come from KBF's design tokens (`var(--kbf-…)`). The series' Graphic
+  Artist sets those once for the whole course, in light or dark, so a component that reads them looks
+  right in every course without changing. The value after the comma is a fallback for a page with no
+  theme; pick one that passes contrast on its own fallback background.
+
+  Don't style buttons from scratch: `kbf-btn` (and `kbf-btn kbf-btn--secondary`) already carries the
+  fill, hover, focus ring and touch target. Add layout to it, not looks.
+*/
+
+.rc {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--kbf-color-surface, #ffffff);
+  color: var(--kbf-color-text, #1e293b);
+  border-radius: var(--kbf-radius-lg, var(--kbf-border-radius, 12px));
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+}
+
+/* With a picture: two columns, picture on the side Graphics chose. */
+.rc[data-image-side] { grid-template-columns: 2fr 3fr; }
+.rc[data-image-side="right"] .rc-media { order: 2; }
+
+/* A 4:3 frame, matching `size` in settings.js. */
+.rc-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+}
+
+/* The look's type roles: one `font` shorthand each. */
+.rc-heading {
+  margin: 0 0 0.75rem;
+  font: var(--kbf-type-heading-m, 700 1.5rem/1.3 system-ui, sans-serif);
+  color: var(--kbf-color-heading, #0f172a);
+}
+.rc-text,
+.rc-reveal-text {
+  margin: 0 0 1.25rem;
+  font: var(--kbf-type-body, 400 1rem/1.6 system-ui, sans-serif);
+}
+
+.rc-reveal {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--kbf-color-border, #475569);
+}
+.rc-reveal-text { margin: 0; }
+.rc-reveal:focus { outline: none; }
+
+/* Narrow screens: one column, picture on top. */
+@media (max-width: 640px) {
+  .rc[data-image-side] { grid-template-columns: 1fr; }
+  .rc[data-image-side="right"] .rc-media { order: 0; }
+}

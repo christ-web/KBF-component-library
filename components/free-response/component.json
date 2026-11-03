@@ -1,0 +1,5 @@
+{
+  "name": "Free Response",
+  "version": "1.2.0",
+  "changes": "The answer boxes use the shared field: a 2px black or white edge, the theme's Surface and Body Text, and a visible keyboard focus ring in Focus Ring where focus had been a border colour alone (interactive elements phase 3)."
+}

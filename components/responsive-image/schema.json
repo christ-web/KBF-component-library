@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "category": "Slides & Layout",
+  "icon": "image",
+  "completion": "auto",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-bg",
+    "--kbf-color-muted",
+    "--kbf-font-body"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "image_url": {
+      "altField": "alt",
+      "label": "Primary image",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 1800,
+        "height": 1350,
+        "crop": true,
+        "note": "Shown in a 4:3 frame on landscape screens and cropped to it."
+      },
+      "type": "url",
+      "order": 0
+    },
+    "image_url_portrait": {
+      "optional": true,
+      "altField": "alt",
+      "label": "Portrait orientation image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 1200,
+        "height": 1600,
+        "crop": true,
+        "note": "Shown in a 3:4 frame on portrait screens and cropped to it."
+      },
+      "type": "url",
+      "order": 1
+    },
+    "alt": {
+      "label": "Image alt text",
+      "group": "content",
+      "type": "text",
+      "order": 2
+    },
+    "caption": {
+      "label": "Caption (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 3
+    }
+  }
+}

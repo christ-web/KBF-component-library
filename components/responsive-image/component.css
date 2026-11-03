@@ -1,0 +1,45 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.ri-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+}
+
+.ri-figure {
+  margin: 0;
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+/* A 4:3 frame (Chris, 2026-10-23), as tall as the page allows once the padding and a caption line are
+   taken off, so the whole picture is on screen without scrolling. With a portrait picture supplied, a
+   portrait screen shows it in a 3:4 frame instead; without one, the landscape picture keeps 4:3. */
+.ri-img {
+  max-width: 100%;
+  width: min(100%, (100vh - 2 * clamp(1.25rem, 5vw, 3rem) - 2.5rem) * 4 / 3);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+}
+@media (orientation: portrait) {
+  .ri-figure.ri-has-portrait .ri-img {
+    width: min(100%, (100vh - 2 * clamp(1.25rem, 5vw, 3rem) - 2.5rem) * 3 / 4);
+    aspect-ratio: 3 / 4;
+  }
+}
+
+.ri-caption {
+  margin-top: 0.75rem;
+  font: var(--kbf-type-caption, 400 0.875rem/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-caption-tracking, 0);
+  color: var(--kbf-color-muted, #64748b);
+}

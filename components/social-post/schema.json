@@ -1,0 +1,100 @@
+{
+  "version": 2,
+  "category": "Interactives",
+  "icon": "share-2",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-color-bg",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-color-text",
+    "--kbf-font-body"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "avatar_url": {
+      "optional": true,
+      "label": "Profile avatar image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 200,
+        "height": 200,
+        "crop": true,
+        "note": "Shown as a small circle."
+      },
+      "type": "url",
+      "order": 0
+    },
+    "username": {
+      "label": "Display name / username",
+      "group": "content",
+      "type": "text",
+      "order": 1
+    },
+    "location": {
+      "label": "Location tag (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 2
+    },
+    "post_image": {
+      "optional": true,
+      "altField": "post_image_alt",
+      "label": "Post image (optional)",
+      "group": "content",
+      "accept": "image",
+      "size": {
+        "width": 900,
+        "height": 675,
+        "crop": true,
+        "note": "Shown in a 4:3 frame and cropped to it."
+      },
+      "type": "url",
+      "order": 3
+    },
+    "post_image_alt": {
+      "label": "Post image alt text",
+      "group": "content",
+      "type": "text",
+      "order": 4
+    },
+    "body": {
+      "label": "Post body text",
+      "group": "content",
+      "type": "textarea",
+      "order": 5
+    },
+    "like_label": {
+      "label": "Like button label (default: Like)",
+      "group": "content",
+      "type": "text",
+      "order": 6
+    },
+    "comment_label": {
+      "label": "Comment button label (default: Comment)",
+      "group": "content",
+      "type": "text",
+      "order": 7
+    },
+    "share_label": {
+      "label": "Share button label (default: Share)",
+      "group": "content",
+      "type": "text",
+      "order": 8
+    },
+    "time_ago": {
+      "label": "Timestamp label (e.g. '2 hours ago')",
+      "group": "content",
+      "type": "text",
+      "order": 9
+    }
+  }
+}

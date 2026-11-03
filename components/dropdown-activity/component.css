@@ -1,0 +1,169 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.dda-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  color: var(--kbf-color-text, #1e293b);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.dda-title {
+  font: var(--kbf-type-heading-l, 700 1.5rem/1.2 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-heading-l-tracking, normal);
+  text-transform: var(--kbf-type-heading-l-transform, none);
+  color: var(--kbf-color-heading, #0f172a);
+  margin: 0 0 0.5rem;
+}
+
+.dda-instructions {
+  font: var(--kbf-type-body, 400 1rem/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-body-tracking, normal);
+  text-transform: var(--kbf-type-body-transform, none);
+  color: var(--kbf-color-muted, #64748b);
+  margin: 0 0 1.5rem;
+}
+
+.dda-questions {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  border: 1px solid var(--kbf-color-border, #00293c);
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+  overflow: hidden;
+}
+
+.dda-row {
+  position: relative;
+  /* 0.625rem, not 0.875rem: the 44px field (phase 3) made each row 4px taller, and three rows scrolled a
+     desktop page by 19px. */
+  padding: 0.625rem 1rem 0.625rem 1.25rem;
+  border-bottom: 1px solid var(--kbf-color-border, #00293c);
+  background-color: var(--kbf-color-surface, #ffffff);
+}
+
+.dda-row:last-child { border-bottom: none; }
+/* The zebra stripe, and the one place in this sweep where the fix is the *opposite* of pinning the
+   foreground. Every other hardcoded background in the library is hardcoded because the colour carries
+   meaning — a chat bubble's sender, a callout's type, a mail client's chrome — so the text on it gets
+   pinned to match. A stripe carries nothing but "this is a different row from the last one", which
+   makes the literal the wrong half: --kbf-color-text over #f5f5f5 measured **1.14:1** under a dark
+   palette, and pinning the text here would instead freeze a light row into a dark module.
+
+   Repointed at --kbf-color-bg, which turns an ungated literal into a pair both contrast tables
+   already gate at 4.5:1 (14.33:1 under this palette). #f8fafc against the #ffffff surface above it is
+   an imperceptible move from #f5f5f5, so an unthemed module looks the same.
+
+   Not --kbf-color-track: its #e2e8f0 default would visibly darken every stripe on every existing
+   module. Not rgba(0,0,0,0.04), which lands on exactly #f5f5f5 over white but is still a literal
+   nothing measures. */
+.dda-row--odd { background-color: var(--kbf-color-bg, #f8fafc); }
+
+.dda-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color var(--kbf-duration-base, 200ms) var(--kbf-ease-standard, cubic-bezier(0.2,0,0,1));
+}
+
+/* Right and wrong from the theme (Chris, 2026-10-28), replacing the fixed pastels and the light-page
+   text pinned on them: an answered row takes the solved tint (`applyOptionTints` in the runtime), which
+   keeps Body Text at 4.5:1, and its edge and icon take the state's colour, the icon's mark its on- colour
+   (the SVGs already say so; the pins that overrode them are gone). Ruling 13 (2026-09-25) stands:
+   "defensible, not the answer" is shown as a wrong answer, and still reports to the LMS as `neutral`. */
+.dda-row--correct::before   { background-color: var(--kbf-color-correct, #15803d); }
+.dda-row--incorrect::before,
+.dda-row--neutral::before   { background-color: var(--kbf-color-incorrect, #dc2626); }
+
+.dda-row--correct   { background-color: var(--kbf-color-correct-bg, var(--kbf-color-surface, #ffffff)) !important; }
+.dda-row--incorrect,
+.dda-row--neutral   { background-color: var(--kbf-color-incorrect-bg, var(--kbf-color-surface, #ffffff)) !important; }
+
+.dda-label {
+  display: block;
+  font: var(--kbf-type-body-strong, 600 1rem/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-body-strong-tracking, normal);
+  text-transform: var(--kbf-type-body-strong-transform, none);
+  color: var(--kbf-color-text, #1e293b);
+  margin-bottom: 0.5rem;
+}
+
+.dda-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* The answer is the shared field (`kbf-field` in the runtime's CONTROLS_CSS): a 1px outline in Border, Surface and
+   Body Text, at least 44px, and the keyboard-only ring in Focus Ring. */
+.dda-select {
+  flex: 1;
+  max-width: 400px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+
+.dda-select:disabled { cursor: default; }
+
+.dda-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dda-controls {
+  text-align: right;
+  margin-bottom: 1.25rem;
+}
+
+.dda-feedback-panel[hidden] { display: none; }
+
+.dda-feedback-panel {
+  padding: 1rem 1.25rem;
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+  border: 1px solid var(--kbf-color-border, #00293c);
+  background-color: var(--kbf-color-surface, #ffffff);
+}
+
+.dda-feedback-panel:focus { outline: none; }
+
+.dda-feedback--correct {
+  border: 2px solid var(--kbf-color-correct, #15803d);
+  background-color: var(--kbf-color-correct-bg, var(--kbf-color-surface, #ffffff));
+}
+
+.dda-feedback--incorrect {
+  border: 2px solid var(--kbf-color-incorrect, #dc2626);
+  background-color: var(--kbf-color-incorrect-bg, var(--kbf-color-surface, #ffffff));
+}
+
+.dda-feedback-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.dda-feedback-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.dda-feedback-text {
+  font: var(--kbf-type-feedback, 600 1rem/1.5 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-feedback-tracking, normal);
+  text-transform: var(--kbf-type-feedback-transform, none);
+  color: var(--kbf-color-text, #1e293b);
+  margin: 0;
+}
+
+.dda-try-again {
+  margin-top: 0.75rem;
+}
+

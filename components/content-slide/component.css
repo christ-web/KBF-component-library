@@ -1,0 +1,113 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.csl-wrapper {
+  height: 100%;
+  min-height: 300px;
+  overflow-y: auto;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+}
+
+/* ── The scrim ────────────────────────────────────────────────────────────────
+   A veil between an author-supplied background photograph and the text on top of it.
+
+   Nothing can measure contrast against a photograph: `CONTRAST_PAIRS` measures text against
+   `--kbf-color-bg`, and a `background-size: cover` image covers exactly that. axe answers
+   `incomplete` with `bgImage` and is right to. The scrim is what replaces the unmeasurable
+   background with one KBF chose, so the pair is decidable again.
+
+   **White, and 0.6.** Black or white and nothing between, per Chris's rule of 2026-09-18 — every
+   grey is another measurement and another argument. White because this slide paints dark theme
+   tokens; 0.6 is the smallest alpha at which both of them clear 4.5:1 over the worst case, a
+   *black* photograph (the veil composites to #999999 there: heading 6.27:1, body 5.14:1).
+   `backend/tests/test_component_scrim.py` is that arithmetic, run on every build.
+
+   It is a background *layer*, not an overlay element: `component.js` composes
+   `var(--csl-scrim, none), url(…)`, so veil and photo are two layers of one property on one box —
+   no extra DOM node, no stacking context, and nothing for the scroll container to shift out from
+   under. The custom property is what lets a class set the veil while `component.js` sets the photo,
+   which one `background-image` declaration otherwise could not. */
+.csl-wrapper { --csl-scrim: none; }
+.csl-wrapper.csl-scrim { --csl-scrim: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)); }
+
+/* The scroll container is focusable, so it needs a visible indicator (WCAG 2.4.7). Inset because
+   the wrapper fills the slide — an outward outline would be clipped by the iframe edge. */
+.csl-wrapper:focus-visible {
+  outline: 2px solid var(--kbf-color-primary, #00293C);
+  outline-offset: -2px;
+}
+
+.csl-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  height: 100%;
+}
+
+/* text-only: image col hidden */
+.csl-inner.csl-text-only .csl-image-col { display: none; }
+.csl-inner.csl-text-only .csl-text-col  { flex: 1; }
+
+/* image-right (default two-col) */
+.csl-inner.csl-image-right { flex-direction: row; }
+.csl-inner.csl-image-right .csl-text-col  { flex: 1; }
+.csl-inner.csl-image-right .csl-image-col { flex: 1; }
+
+/* image-left */
+.csl-inner.csl-image-left { flex-direction: row-reverse; }
+.csl-inner.csl-image-left .csl-text-col  { flex: 1; }
+.csl-inner.csl-image-left .csl-image-col { flex: 1; }
+
+/* image-top: stacked */
+.csl-inner.csl-image-top {
+  flex-direction: column;
+  align-items: stretch;
+}
+.csl-inner.csl-image-top .csl-image-col { order: -1; }
+
+/* Stacked on a narrow page (2026-10-23): side by side on a phone, each column got half of 375px and the
+   text ran a word or two to a line. The image goes above the text, as image-top draws it. */
+@media (max-width: 40rem) {
+  .csl-inner.csl-image-right,
+  .csl-inner.csl-image-left { flex-direction: column; align-items: stretch; gap: 1.5rem; }
+  .csl-inner.csl-image-right .csl-image-col,
+  .csl-inner.csl-image-left .csl-image-col { order: -1; }
+}
+
+.csl-heading {
+  font: var(--kbf-type-display-m, 700 2rem/1.2 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-display-m-tracking, normal);
+  text-transform: var(--kbf-type-display-m-transform, none);
+  /* On a look with a heading band (Poster) a title Graphics gave no colour of its own is set in the band's
+     ink; `--kbf-band-ink` is `initial` on every other look, so this falls through to the usual colour. */
+  color: var(--kbf-band-ink, var(--kbf-color-heading, #0f172a));
+  margin: 0 0 1rem;
+}
+
+.csl-body {
+  font: var(--kbf-type-body, 400 1rem/1.7 system-ui, sans-serif);
+  letter-spacing: var(--kbf-type-body-tracking, normal);
+  text-transform: var(--kbf-type-body-transform, none);
+  color: var(--kbf-color-text, #1e293b);
+  white-space: pre-wrap;
+}
+
+.csl-body p { margin: 0 0 0.75rem; }
+.csl-body p:last-child { margin-bottom: 0; }
+
+/* A 4:3 frame, the stage's own shape (Chris, 2026-10-23), filled by the picture and cropped to it — which is
+   what the slot's recommended size says. At most half the page's height, so the heading and body still
+   fit beside or under it on a 1024×768 stage. */
+.csl-image {
+  width: min(100%, 50vh * 4 / 3);
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin-inline: auto;
+  border-radius: var(--kbf-radius-md, var(--kbf-border-radius, 8px));
+}

@@ -1,0 +1,6 @@
+{
+  "name": "kbf-components",
+  "private": true,
+  "type": "module",
+  "//": "Not an installable package. This exists so node treats every settings.js as ESM instead of sniffing it and warning on each load. There are no dependencies: the SDK is _sdk/index.js, imported by relative path."
+}

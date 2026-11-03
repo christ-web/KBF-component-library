@@ -1,0 +1,43 @@
+.kbf-callout {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem 2rem;
+  border-radius: var(--kbf-radius-lg, var(--kbf-border-radius, 12px));
+  border-left: 5px solid #3b82f6;
+  background: #eff6ff;
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  margin: 2rem auto;
+  max-width: 760px;
+  align-items: flex-start;
+}
+.kbf-callout[data-type="tip"]       { border-color: #10b981; background: #ecfdf5; }
+.kbf-callout[data-type="warning"]   { border-color: #f59e0b; background: #fffbeb; }
+.kbf-callout[data-type="important"] { border-color: #ef4444; background: #fef2f2; }
+/* The four callout faces are hardcoded, and deliberately: the face *is* the callout's type, which is
+   the one cue distinguishing a tip from a warning. So both foregrounds are pinned too, at the value
+   their `var()` fallbacks already supplied — a themed colour over a fixed background cannot promise a
+   ratio, and under a dark palette --kbf-color-heading (#f9fafb) on #eff6ff measured 1.04:1 and
+   --kbf-color-muted (#9ca3af) 2.33:1. Same fix, and the same reasoning, as `.cs-input-pill` in
+   chat-simulation.
+
+   Unchanged on an unthemed module, byte for byte, and measured against all four faces, since the type
+   is the author's choice: #1e293b is 13.44:1 on #eff6ff and no lower on the others; #475569 is
+   6.93:1 on #fef2f2, its worst, and 7.31:1 on #fffbeb, its best. */
+
+.callout-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.callout-headline {
+  /* bodyStrong role — converted from font-size: 1rem / font-weight: 700 */
+  font: var(--kbf-type-body-strong, 700 1rem/1.4 system-ui, sans-serif);
+  margin: 0 0 0.4rem;
+  color: #1e293b;
+}
+.callout-body {
+  /* body role — converted from font-size: 0.95rem */
+  font: var(--kbf-type-body, 400 1rem/1.6 system-ui, sans-serif);
+  margin: 0;
+  color: #475569;
+}

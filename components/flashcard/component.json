@@ -1,0 +1,5 @@
+{
+  "name": "Flashcard",
+  "version": "1.1.1",
+  "changes": "The card's faces no longer draw the 2px black or white edge (Chris, 2026-10-29); its focus ring still shows for the keyboard only, in Focus Ring."
+}

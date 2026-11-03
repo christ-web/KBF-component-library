@@ -1,0 +1,215 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+/* STAGE3-NEEDS: --kbf-type-artifact-heading-m, --kbf-type-artifact-body, --kbf-type-artifact-meta,
+   --kbf-type-artifact-label tokens for the artifact (imitation-app) type set. Until they exist the
+   fixed sizes below implement the spec (ruling 2 / role map Q2): heading-m 17px, body 15px,
+   meta/label 12–14px, all in the look's text face. */
+
+.cs-wrapper {
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  padding: clamp(1.25rem, 5vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+/* Everything inside the phone frame is painted on a hardcoded colour — the frame's #ffffff, the
+   header's #fafafa, the two bubble colours, the #e6e6e6 pills. Those are the phone, not the theme,
+   and CLAUDE.md keeps them literal because in the bubbles' case the colour *is* the sender identity
+   the exercise teaches. So every foreground over them is pinned too, at the value its `var()`
+   fallback already supplied: a themed colour over a fixed background cannot promise a ratio, and
+   under a dark palette --kbf-color-text (#e5e7eb) on a received bubble measured 1.01:1. The
+   reasoning and the arithmetic are `.cs-input-pill`'s, below, which reached it one site at a time in
+   a QA preview; this is the same fix applied to the rest of the phone.
+
+   Unchanged on an unthemed module, byte for byte — every literal here is the fallback that was
+   already resolving. Measured, so a future tweak to one of them has a number to beat:
+   #1e293b on #fafafa 14.02:1 · on #dbebf8 12.02:1 · on #dbf8e3 12.92:1 · on #e6e6e6 11.72:1;
+   #64748b on #ffffff 4.76:1, which clears 4.5:1 with little to spare. */
+
+/* Phone frame */
+.cs-phone {
+  background-color: #ffffff;
+  border: 1px solid #dad8da;
+  box-shadow: var(--kbf-shadow-mid, 0 4px 12px rgba(0, 0, 0, 0.12));
+  width: 100%;
+  max-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--kbf-radius-2xl, 1.5rem);
+  overflow: hidden;
+}
+
+/* Header */
+.cs-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 1rem 1rem;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #fafafa;
+  gap: 0.4rem;
+}
+
+.cs-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--kbf-radius-full, 50%);
+  background-color: var(--kbf-color-primary, #00293C);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cs-avatar-icon { flex-shrink: 0; }
+
+.cs-avatar--has-image .cs-avatar-icon { display: none; }
+
+.cs-contact {
+  /* Artifact headingM — fixed 17px / 1.0625rem; family inherits from .cs-wrapper */
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.45;
+  /* Pinned: the header is #fafafa. See the note at the top of this file. */
+  color: #1e293b;
+  text-align: center;
+}
+
+/* Body / messages */
+/* The messages scroll inside the phone, which itself fits the page (2026-10-23): at a flat 26rem the
+   phone ran 3px past a 1024×768 stage's page. The page's height less its padding and the header and
+   input bar (about 12rem), never below 10rem. */
+.cs-body {
+  flex: 1;
+  overflow-y: auto;
+  max-height: max(10rem, min(26rem, 100vh - 2 * clamp(1.25rem, 5vw, 3rem) - 12rem));
+}
+
+/* Focusable for keyboard scrolling, so it needs a visible indicator (WCAG 2.4.7). Inset so the
+   ring stays inside the phone frame. */
+.cs-body:focus-visible {
+  outline: 2px solid var(--kbf-color-primary, #00293C);
+  outline-offset: -2px;
+}
+
+.cs-messages {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* Date stamp */
+.cs-date {
+  align-self: center;
+  background-color: #e6e6e6;
+  border-radius: var(--kbf-radius-full, 9999px);
+  /* Artifact meta — fixed 12px; family inherits */
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.45;
+  padding: 0.35rem 0.9rem;
+  margin: 0.5rem 0 0.8rem;
+  /* Pinned: the stamp's own #e6e6e6. */
+  color: #1e293b;
+}
+
+/* Message bubble */
+.cs-msg {
+  max-width: 90%;
+  margin: 0.4rem 0;
+  align-self: flex-start;
+}
+
+.cs-msg--sent { align-self: flex-end; }
+
+.cs-bubble {
+  position: relative;
+  background-color: #dbebf8;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--kbf-radius-2xl, 1.5rem) var(--kbf-radius-2xl, 1.5rem) var(--kbf-radius-2xl, 1.5rem) 0;
+  /* Artifact body — fixed 15px / 0.9375rem; family inherits */
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  /* Pinned: #dbebf8 received, #dbf8e3 sent — the two colours that carry who is speaking. */
+  color: #1e293b;
+}
+
+.cs-bubble::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 0;
+  border-bottom: 1.1rem solid transparent;
+  border-left: 1.3rem solid #dbebf8;
+  bottom: -1.1rem;
+  left: 0;
+}
+
+.cs-msg--sent .cs-bubble {
+  background-color: #dbf8e3;
+  border-radius: var(--kbf-radius-2xl, 1.5rem) var(--kbf-radius-2xl, 1.5rem) 0 var(--kbf-radius-2xl, 1.5rem);
+}
+
+.cs-msg--sent .cs-bubble::before {
+  left: auto;
+  right: 0;
+  transform: rotateY(180deg);
+  border-left-color: #dbf8e3;
+}
+
+.cs-msg-time {
+  /* Artifact meta — fixed 12px; timestamp, allowed below 14px floor */
+  font-size: 0.75rem;
+  line-height: 1.45;
+  /* Pinned: sits outside the bubble, on the frame's #ffffff. */
+  color: #64748b;
+  margin-top: 0.35rem;
+  padding: 0 0.1rem;
+}
+
+.cs-msg--sent .cs-msg-time { text-align: right; }
+
+/* Footer input bar */
+.cs-footer {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.cs-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cs-input-pill {
+  flex: 1;
+  background-color: #e6e6e6;
+  border-radius: var(--kbf-radius-full, 9999px);
+  /* Artifact label — raised to 14px (was 13px in the artifact spec, and 14.4px here → 14px) */
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.45;
+  padding: 0.7rem 1.4rem;
+  /* Not `--kbf-color-muted`: on this pill's hardcoded #e6e6e6 the token's #64748b measures 3.81:1 at
+     14.4px, an AA failure axe caught in the QA preview (600 weight is not "large text" until
+     18.66px). Both halves of the pair belong to the phone chrome rather than the theme, so the
+     foreground is pinned here too — a themed colour over a fixed background cannot promise a ratio.
+     #475569 is 6.07:1 and still reads as placeholder grey. */
+  color: #475569;
+}
+
+.cs-camera-icon {
+  /* Pinned: the footer's #ffffff. A non-text glyph, so its floor is 3:1, and 4.76:1 clears it. */
+  color: #64748b;
+  display: flex;
+  align-items: center;
+}

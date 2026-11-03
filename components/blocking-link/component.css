@@ -1,0 +1,42 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+.bl-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  background-color: var(--kbf-color-bg, #f8fafc);
+  font-family: var(--kbf-font-body, system-ui, sans-serif);
+  text-align: center;
+}
+
+.bl-instructions {
+  color: var(--kbf-color-muted, #64748b);
+  font: var(--kbf-type-body, 400 1.0625rem/1.65 system-ui, sans-serif);
+  margin: 0 0 1.5rem;
+  max-width: 480px;
+}
+
+.bl-link {
+  text-decoration: none;
+}
+
+.bl-link-icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.bl-link.bl-visited {
+  background-color: var(--kbf-color-correct, #15803d);
+}
+
+.bl-status {
+  margin-top: 1rem;
+  font: var(--kbf-type-caption, 400 0.875rem/1.45 system-ui, sans-serif);
+  font-weight: 600;
+  color: var(--kbf-color-correct, #15803d);
+  min-height: 1.25em;
+}

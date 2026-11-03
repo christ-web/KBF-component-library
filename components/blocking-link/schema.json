@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "category": "Slides & Layout",
+  "icon": "link",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-border-radius",
+    "--kbf-color-bg",
+    "--kbf-color-correct",
+    "--kbf-color-muted",
+    "--kbf-color-primary",
+    "--kbf-font-body"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "text": {
+      "label": "Link text",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "href": {
+      "label": "Link URL",
+      "group": "content",
+      "type": "url",
+      "order": 1
+    },
+    "instructions": {
+      "label": "Instruction text above the link (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 2
+    }
+  }
+}

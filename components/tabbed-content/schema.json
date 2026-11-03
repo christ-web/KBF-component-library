@@ -1,0 +1,84 @@
+{
+  "version": 2,
+  "category": "Interactives",
+  "icon": "columns-3",
+  "completion": "explicit",
+  "styleTokens": [
+    "--kbf-color-bg",
+    "--kbf-color-border",
+    "--kbf-color-correct",
+    "--kbf-color-primary",
+    "--kbf-color-surface",
+    "--kbf-color-text",
+    "--kbf-font-body",
+    "--kbf-color-hover-bg",
+    "--kbf-color-hover-text"
+  ],
+  "groups": [
+    {
+      "key": "content",
+      "label": "Content",
+      "owner": "id",
+      "order": 0
+    }
+  ],
+  "fields": {
+    "tab1_title": {
+      "label": "Tab 1 title",
+      "group": "content",
+      "type": "text",
+      "order": 0
+    },
+    "tab1_content": {
+      "label": "Tab 1 body text",
+      "group": "content",
+      "type": "textarea",
+      "order": 1
+    },
+    "tab2_title": {
+      "label": "Tab 2 title (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 2
+    },
+    "tab2_content": {
+      "label": "Tab 2 body text (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 3
+    },
+    "tab3_title": {
+      "label": "Tab 3 title (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 4
+    },
+    "tab3_content": {
+      "label": "Tab 3 body text (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 5
+    },
+    "tab4_title": {
+      "label": "Tab 4 title (optional)",
+      "group": "content",
+      "type": "text",
+      "order": 6
+    },
+    "tab4_content": {
+      "label": "Tab 4 body text (optional)",
+      "group": "content",
+      "type": "textarea",
+      "order": 7
+    },
+    "blocking": {
+      "label": "Learner must finish this to go on",
+      "group": "content",
+      "default": true,
+      "whenLocked": true,
+      "help": "Holds the page until every tab is visited. Off, these tabs do not hold it.",
+      "type": "boolean",
+      "order": 8
+    }
+  }
+}

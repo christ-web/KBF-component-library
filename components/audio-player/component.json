@@ -1,0 +1,5 @@
+{
+  "name": "Audio Player",
+  "version": "1.1.3",
+  "changes": "The seek bar has an invisible 24px-tall hit area around the track (WCAG 2.5.8 target size, Chris, 2026-10-28). The track, the controls and the seek maths are unchanged."
+}
